@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>드래곤 힐스 관리자 대시보드</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/src/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="dashboard-body">
+  <nav class="sidebar">
+    <div class="sidebar-logo">
+      <h2>Dragon Admin</h2>
+    </div>
+    <ul class="sidebar-menu">
+      <li class="active"><a href="#"><i class="fas fa-chart-pie"></i> 대시보드 홈</a></li>
+      <li><a href="index.html" target="_blank"><i class="fas fa-external-link-alt"></i> 웹사이트 보기</a></li>
+    </ul>
+  </nav>
+
+  <main class="dashboard-main">
+    <header class="dashboard-header">
+      <h1>예약 및 운영 대시보드</h1>
+      <div class="header-user">
+        <i class="fas fa-user-circle"></i> 관리자
+      </div>
+    </header>
+
+    <!-- 핵심 KPI 현황 -->
+    <section class="kpi-cards">
+      <div class="kpi-card">
+        <div class="kpi-icon"><i class="fas fa-calendar-check"></i></div>
+        <div class="kpi-info">
+          <h3>총 예약 건수</h3>
+          <p id="totalReservations">0</p>
+        </div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon"><i class="fas fa-users"></i></div>
+        <div class="kpi-info">
+          <h3>금일 입국(체크인) 인원</h3>
+          <p id="todayArrivals">0</p>
+        </div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon"><i class="fas fa-plane-departure"></i></div>
+        <div class="kpi-info">
+          <h3>금일 출국(체크아웃) 인원</h3>
+          <p id="todayDepartures">0</p>
+        </div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon"><i class="fas fa-utensils"></i></div>
+        <div class="kpi-info">
+          <h3>금일 식수 예상 인원</h3>
+          <p id="todayMeals">0</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="dashboard-grid">
+      <!-- 좌측 메인: 일자별 식수 차트 -->
+      <section class="chart-section dashboard-panel">
+        <div class="panel-header">
+          <h2><i class="fas fa-chart-bar"></i> 일자별 식수 인원 투숙 추이 (향후 14일)</h2>
+        </div>
+        <div class="chart-container">
+          <canvas id="mealsChart"></canvas>
+        </div>
+      </section>
+
+      <!-- 우측 서브: 특정 일자 명단 조회 -->
+      <section class="date-check-section dashboard-panel">
+        <div class="panel-header">
+          <h2><i class="fas fa-search"></i> 일자별 명단 조회</h2>
+        </div>
+        <div class="date-filter">
+          <input type="date" id="searchDate">
+          <button id="btnSearchDate" class="action-btn">조회</button>
+        </div>
+        
+        <div class="daily-lists">
+          <div class="list-group">
+            <h3><span class="badge arrival">입국</span> 체크인 명단</h3>
+            <ul id="arrivalList" class="guest-list">
+              <li class="empty-state">날짜를 선택하고 조회해주세요.</li>
+            </ul>
+          </div>
+          <div class="list-group">
+            <h3><span class="badge departure">출국</span> 체크아웃 명단</h3>
+            <ul id="departureList" class="guest-list">
+              <li class="empty-state">날짜를 선택하고 조회해주세요.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- 하단 전체 테이블 -->
+    <section class="table-section dashboard-panel">
+      <div class="panel-header">
+        <h2><i class="fas fa-list"></i> 전체 예약 문의 목록</h2>
+        <button id="btnClearData" class="action-btn outline">테스트 데이터 초기화</button>
+      </div>
+      <div class="table-responsive">
+        <table id="reservationsTable">
+          <thead>
+            <tr>
+              <th>접수일시</th>
+              <th>예약자명</th>
+              <th>연락처</th>
+              <th>체크인(입국)</th>
+              <th>체크아웃(출국)</th>
+              <th>숙박인원</th>
+              <th>상태</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="7" class="empty-state">데이터가 없습니다. 메인 페이지에서 예약을 접수해주세요.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="/src/dashboard.js" type="module"></script>
+</body>
+</html>

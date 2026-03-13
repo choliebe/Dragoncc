@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원가입 - 드래곤 힐스 C.C.</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body class="auth-page">
+  <nav class="top-nav">
+    <a href="index.html" class="nav-logo">Dragon Hills</a>
+    <div class="nav-links">
+      <a href="#" onclick="alert('로그인 페이지는 준비중입니다.')">로그인</a>
+      <a href="signup.html" class="nav-signup-btn">회원가입</a>
+    </div>
+  </nav>
+
+  <section class="auth-section">
+    <div class="reservation-container" style="width: 100%; border-top: 5px solid var(--primary);">
+      <h2>회원가입</h2>
+      <form id="signupForm">
+        <div class="form-group" style="margin-bottom: 20px;">
+          <label>이메일</label>
+          <input type="email" placeholder="example@email.com" required>
+        </div>
+        <div class="form-group" style="margin-bottom: 20px;">
+          <label>비밀번호</label>
+          <input type="password" placeholder="비밀번호 입력 (8자 이상)" required minlength="8">
+        </div>
+        <div class="form-group" style="margin-bottom: 20px;">
+          <label>비밀번호 확인</label>
+          <input type="password" placeholder="비밀번호 다시 입력" required minlength="8">
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>이름</label>
+            <input type="text" placeholder="홍길동" required>
+          </div>
+          <div class="form-group">
+            <label>연락처</label>
+            <input type="tel" placeholder="010-0000-0000" required>
+          </div>
+        </div>
+        <button type="submit" class="submit-btn" style="margin-top: 30px;">
+          가입하기
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-logo">Dragon Hills C.C.</span>
+    <div class="footer-info">
+      <p>Ratchaburi, Thailand | 한국인 고객 전용 서비스 운영 중</p>
+      <p>Email: contact@dragonhillscc.com | Tel: 070-8997-3976</p>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Dragon Hills Golf & Country Club. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/src/main.js" type="module"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const signupForm = document.getElementById('signupForm');
+      if (signupForm) {
+        signupForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          // 기본적인 비밀번호 확인 로직
+          const passwords = signupForm.querySelectorAll('input[type="password"]');
+          if (passwords[0].value !== passwords[1].value) {
+            alert('비밀번호가 일치하지 않습니다.');
+            return;
+          }
+          
+          alert('회원가입이 완료되었습니다. 환영합니다!');
+          window.location.href = 'index.html';
+        });
+      }
+    });
+  </script>
+</body>
+</html>

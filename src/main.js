@@ -5,7 +5,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (form) {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            alert('예약 문의가 접수되었습니다. 담당자가 곧 연락드리겠습니다.');
+            
+            // 데이터베이스 저장을 위한 객체 생성
+            const reservationData = {
+                id: Date.now(), // 고유 ID로 타임스탬프 활용
+                checkinDate: document.getElementById('checkinDate').value,
+                checkoutDate: document.getElementById('checkoutDate').value,
+                guestCount: parseInt(document.getElementById('guestCount').value),
+                guestName: document.getElementById('guestName').value,
+                guestPhone: document.getElementById('guestPhone').value,
+                createdAt: new Date().toISOString()
+            };
+
+            // localStorage에서 기존 데이터 불러오기 (없으면 빈 배열 참조)
+            const existingReservations = JSON.parse(localStorage.getItem('dragonHillsReservations')) || [];
+            
+            // 새 데이터 추가 및 다시 저장
+            existingReservations.push(reservationData);
+            localStorage.setItem('dragonHillsReservations', JSON.stringify(existingReservations));
+
+            alert(`${reservationData.guestName}님, 예약 문의가 접수되었습니다!\n담당자가 곧 연락드리겠습니다.`);
             form.reset();
         });
     }

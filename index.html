@@ -9,9 +9,17 @@
   <link rel="stylesheet" href="/src/style.css">
 </head>
 <body>
+  <nav class="top-nav">
+    <a href="index.html" class="nav-logo">Dragon Hills</a>
+    <div class="nav-links">
+      <a href="#" onclick="alert('로그인 페이지는 준비중입니다.')">로그인</a>
+      <a href="signup.html" class="nav-signup-btn">회원가입</a>
+    </div>
+  </nav>
+
   <header class="hero">
     <div class="hero-bg">
-      <img src="/public/panorama.jpg" alt="드래곤 힐스 전경 파노라마">
+      <img src="./src/assets/panorama.jpg" alt="드래곤 힐스 전경 파노라마">
     </div>
     <div class="hero-content fade-in">
       <h1>드래곤 힐스 C.C.</h1>
@@ -40,7 +48,7 @@
 
   <section class="split-section">
     <div class="split-image">
-      <img src="/public/resort.png" alt="드래곤 힐스 리조트 뷰">
+      <img src="https://via.placeholder.com/600x400/1a472a/ffffff?text=Resort+View" alt="드래곤 힐스 리조트 뷰">
     </div>
     <div class="split-content">
       <h2>라운딩 후 누리는 최상의 휴식</h2>
@@ -63,7 +71,7 @@
 
   <section class="split-section reverse">
     <div class="split-image">
-      <img src="/public/dining.png" alt="한식 뷔페 다이닝">
+      <img src="https://via.placeholder.com/600x400/c5a059/ffffff?text=Fine+Dining" alt="한식 뷔페 다이닝">
     </div>
     <div class="split-content">
       <h2>한국인의 입맛을 위한 고품격 다이닝</h2>
@@ -83,23 +91,23 @@
         <div class="form-grid">
           <div class="form-group">
             <label>체크인 날짜</label>
-            <input type="date" required>
+            <input type="date" id="checkinDate" required>
           </div>
           <div class="form-group">
             <label>체크아웃 날짜</label>
-            <input type="date" required>
+            <input type="date" id="checkoutDate" required>
           </div>
         </div>
         <div class="form-grid">
           <div class="form-group">
             <label>숙박 인원</label>
-            <select required>
+            <select id="guestCount" required>
               <option value="">인원을 선택하세요</option>
               <option value="1">1명</option>
               <option value="2">2명</option>
               <option value="3">3명</option>
               <option value="4">4명 (1팀)</option>
-              <option value="group">단체(별도문의)</option>
+              <option value="5">단체(별도문의)</option>
             </select>
           </div>
           <div class="form-group">
@@ -112,11 +120,11 @@
         <div class="form-grid">
           <div class="form-group">
             <label>성함</label>
-            <input type="text" placeholder="예약자 성함" required>
+            <input type="text" id="guestName" placeholder="예약자 성함" required>
           </div>
           <div class="form-group">
             <label>연락처</label>
-            <input type="tel" placeholder="010-0000-0000" required>
+            <input type="tel" id="guestPhone" placeholder="010-0000-0000" required>
           </div>
         </div>
         <button type="submit" class="submit-btn">
@@ -127,10 +135,10 @@
   </section>
 
   <footer>
-    <span class="footer-logo">Dragon Hills G.C.</span>
+    <span class="footer-logo">Dragon Hills C.C.</span>
     <div class="footer-info">
       <p>Ratchaburi, Thailand | 한국인 고객 전용 서비스 운영 중</p>
-      <p>Email: contact@dragonhillscc.com | Tel: +66 (0)XX-XXX-XXXX</p>
+      <p>Email: contact@dragonhillscc.com | Tel: 070-8997-3976</p>
     </div>
     <div class="footer-bottom">
       <p>&copy; 2026 Dragon Hills Golf & Country Club. All Rights Reserved.</p>
