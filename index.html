@@ -3,52 +3,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>드래곤 힐스 C.C. - 예약 및 코스</title>
+  <title>드래곤 힐스 C.C. - 실시간 예약 및 문의</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body { margin: 0; font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; }
-    .top-nav { background: #343a40; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
-    .nav-logo { font-size: 20px; font-weight: bold; color: white; text-decoration: none; }
+    body { margin: 0; font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; background: #f0f2f1; }
+    .top-nav { background: #1a472a; color: white; padding: 15px; text-align: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .nav-logo { font-size: 22px; font-weight: bold; color: white; text-decoration: none; display: block; }
     
-    /* 슬라이더 영역 */
-    .slider-container { position: relative; width: 95%; max-width: 800px; margin: 20px auto; overflow: hidden; border-radius: 10px; background: #eee; min-height: 250px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    .slides { display: none; width: 100%; text-align: center; }
-    .slides img { width: 100%; height: auto; min-height: 250px; object-fit: cover; display: block; }
-    .slide-text { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.7); color: white; padding: 10px 0; font-size: 16px; }
+    /* 1. 예약 양식 영역 (최상단) */
+    .reservation-section { padding: 30px 15px; background: #1a472a; color: white; text-align: center; }
+    .res-box { max-width: 500px; margin: 0 auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); color: #333; }
+    .res-box h2 { margin-top: 0; color: #1a472a; font-size: 22px; margin-bottom: 20px; }
+    .form-group { margin-bottom: 15px; text-align: left; }
+    .form-group label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 14px; }
+    .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 16px; }
+    .submit-btn { width: 100%; padding: 15px; background: #c5a059; color: white; border: none; border-radius: 6px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+    .submit-btn:hover { background: #b48f48; }
+
+    /* 2. 코스 슬라이더 영역 (예약 양식 아래) */
+    .course-section { padding: 40px 15px; text-align: center; }
+    .slider-container { position: relative; width: 100%; max-width: 800px; margin: 20px auto; overflow: hidden; border-radius: 10px; background: #000; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    .slides { display: none; width: 100%; }
+    .slides img { width: 100%; height: auto; min-height: 250px; max-height: 500px; object-fit: cover; display: block; }
+    .slide-text { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.7); color: white; padding: 12px 0; font-size: 16px; }
     
     /* 화살표 */
-    .prev, .next { cursor: pointer; position: absolute; top: 50%; width: 44px; height: 44px; margin-top: -22px; color: white; background: rgba(26,71,42,0.8); border: none; border-radius: 50%; font-size: 20px; display: flex; align-items: center; justify-content: center; z-index: 10; }
+    .prev, .next { cursor: pointer; position: absolute; top: 50%; width: 44px; height: 44px; margin-top: -22px; color: white; background: rgba(0,0,0,0.5); border: none; border-radius: 50%; font-size: 20px; display: flex; align-items: center; justify-content: center; z-index: 10; }
     .next { right: 10px; }
     .prev { left: 10px; }
 
-    /* 예약 양식 영역 */
-    .reservation-section { padding: 40px 20px; background: #f8f9fa; text-align: center; }
-    .res-box { max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-    .form-group { margin-bottom: 20px; text-align: left; }
-    .form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: #333; }
-    .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 16px; }
-    .submit-btn { width: 100%; padding: 15px; background: #1a472a; color: white; border: none; border-radius: 6px; font-size: 18px; font-weight: bold; cursor: pointer; }
+    footer { padding: 30px; text-align: center; background: #333; color: white; font-size: 13px; }
   </style>
 </head>
 <body>
 
   <nav class="top-nav">
-    <a href="#" class="nav-logo">Dragon Hills</a>
-    <div style="font-size: 14px;">문의: 070-8997-3976</div>
+    <a href="#" class="nav-logo">Dragon Hills C.C.</a>
   </nav>
 
-  <section style="padding: 20px 0;">
-    <h2 style="text-align: center; color: #1a472a;">코스 갤러리</h2>
+  <section class="reservation-section">
+    <div class="res-box">
+      <h2>예약 및 견적 문의</h2>
+      <form id="reservationForm">
+        <div class="form-group">
+          <label>예약자 성함</label>
+          <input type="text" placeholder="성함을 입력해주세요" required>
+        </div>
+        <div class="form-group">
+          <label>연락처</label>
+          <input type="tel" placeholder="010-0000-0000" required>
+        </div>
+        <div class="form-group">
+          <label>방문 인원</label>
+          <select required>
+            <option value="">인원을 선택하세요</option>
+            <option value="4">1팀 (4명)</option>
+            <option value="8">2팀 (8명)</option>
+            <option value="단체">단체/기타 문의</option>
+          </select>
+        </div>
+        <button type="submit" class="submit-btn">견적 및 상담 신청하기</button>
+      </form>
+      <p style="margin-top: 15px; font-size: 14px; color: #1a472a; font-weight: bold;">
+        <i class="fas fa-phone"></i> 빠른상담: 070-8997-3976
+      </p>
+    </div>
+  </section>
+
+  <section class="course-section">
+    <h2 style="color: #1a472a; margin-top: 0;">드래곤 힐스 코스 갤러리</h2>
+    <p style="color: #666; font-size: 14px; margin-bottom: 20px;">화살표를 클릭하여 홀별 전경을 확인하세요.</p>
+    
     <div class="slider-container">
-      <div class="slides" style="display: block;">
-        <img src="hole1.jpg" onerror="this.src='./src/assets/hole1.jpg'; this.onerror=function(){this.src='https://via.placeholder.com/800x450?text=Hole+1+Checking...';}">
+      <div class="slides fade" style="display: block;">
+        <img src="hole1.jpg" onerror="this.src='./src/assets/hole1.jpg'; this.onerror=function(){this.src='https://via.placeholder.com/800x450?text=Dragon+Hills+Hole+1';}">
         <div class="slide-text">1번 홀 (Hole 1)</div>
       </div>
-      <div class="slides">
+      <div class="slides fade">
         <img src="hole2.jpg" onerror="this.src='./src/assets/hole2.jpg';">
         <div class="slide-text">2번 홀 (Hole 2)</div>
       </div>
-      <div class="slides">
+      <div class="slides fade">
         <img src="hole3.jpg" onerror="this.src='./src/assets/hole3.jpg';">
         <div class="slide-text">3번 홀 (Hole 3)</div>
       </div>
@@ -57,34 +92,10 @@
     </div>
   </section>
 
-  <section class="reservation-section">
-    <div class="res-box">
-      <h2 style="margin-top: 0; color: #1a472a;">예약 및 견적 문의</h2>
-      <form id="reservationForm">
-        <div class="form-group">
-          <label>성함</label>
-          <input type="text" placeholder="성함을 입력하세요" required>
-        </div>
-        <div class="form-group">
-          <label>연락처</label>
-          <input type="tel" placeholder="010-0000-0000" required>
-        </div>
-        <div class="form-group">
-          <label>인원</label>
-          <select required>
-            <option value="">인원 선택</option>
-            <option value="4">4명 (1팀)</option>
-            <option value="단체">단체 문의</option>
-          </select>
-        </div>
-        <button type="submit" class="submit-btn">견적 문의하기</button>
-      </form>
-    </div>
-  </section>
-
-  <footer style="padding: 30px; text-align: center; background: #343a40; color: white; font-size: 14px;">
-    Dragon Hills C.C. | Ratchaburi, Thailand<br>
-    Copyright &copy; 2026. All Rights Reserved.
+  <footer>
+    <p><strong>Dragon Hills Golf & Country Club</strong></p>
+    <p>Ratchaburi, Thailand | 한국인 상담 전용 라인</p>
+    <p style="opacity: 0.6; margin-top: 10px;">&copy; 2026 Dragon Hills. All Rights Reserved.</p>
   </footer>
 
   <script>
