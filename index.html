@@ -3,32 +3,108 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>드래곤 힐스 C.C. - 태국 명문 골프장</title>
+  <title>드래곤 힐스 C.C.</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* 1. 기본 스타일 및 배경 (이미지 디자인 복구) */
-    body { margin: 0; padding: 0; font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; scroll-behavior: smooth; }
-    .hero { height: 75vh; display: flex; align-items: center; justify-content: center; text-align: center; color: white; position: relative; }
-    .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #000; }
-    .hero-bg img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.5); }
-    .hero-content h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: bold; }
-    .hero-content p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 25px; }
+    /* 기본 설정 */
+    html { scroll-behavior: smooth; } /* 부드러운 이동 */
+    body { margin: 0; padding: 0; font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; }
     
-    /* 버튼 클릭 시 이동하도록 설정된 클래스 */
-    .cta-btn { display: inline-block; padding: 15px 35px; background: #1a472a; color: white; text-decoration: none; border-radius: 30px; font-weight: bold; transition: 0.3s; cursor: pointer; border: none; }
-    .cta-btn:hover { background: #143620; transform: scale(1.05); }
+    /* 히어로 섹션 */
+    .hero { height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; color: white; position: relative; background: #000; }
+    .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+    .hero-bg img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.5); }
+    .hero-content { position: relative; z-index: 2; padding: 0 20px; }
+    .hero-content h1 { font-size: 2.5rem; margin-bottom: 10px; }
+    
+    /* [중요] 버튼 클릭 시 #reservation-target으로 이동 */
+    .cta-btn { display: inline-block; padding: 15px 35px; background: #1a472a; color: white; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 18px; cursor: pointer; border: none; }
 
-    /* 2. 3가지 특징 카드 섹션 */
+    /* 카드 섹션 */
     .features { display: flex; justify-content: space-around; padding: 50px 20px; background: white; flex-wrap: wrap; gap: 20px; }
-    .feature-card { width: 30%; min-width: 280px; text-align: center; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border: 1px solid #f2f2f2; }
+    .feature-card { width: 30%; min-width: 280px; text-align: center; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border: 1px solid #f2f2f2; box-sizing: border-box; }
     .feature-icon { font-size: 35px; color: #1a472a; margin-bottom: 15px; }
 
-    /* 3. 갤러리 슬라이더 섹션 */
+    /* 갤러리 슬라이더 */
     .gallery-section { padding: 60px 20px; background: #f9f9f9; text-align: center; }
-    .slider-container { position: relative; max-width: 800px; margin: 30px auto; overflow: hidden; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+    .slider-container { position: relative; max-width: 800px; margin: 30px auto; overflow: hidden; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); background: #eee; }
     .slides { display: none; width: 100%; }
-    .slides img { width: 100%; height: auto; min-height: 300px; max-height: 500px; object-fit: cover; display: block; }
-    .slide-text { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.75); color: white; padding: 15px 0; font-size: 18px; font-weight: bold; }
-    
-    /* 슬라이더 화살표 */
-    .prev, .next { cursor:
+    .slides img { width: 100%; height: auto; min-height: 250px; max-height: 500px; object-fit: cover; display: block; }
+    .slide-text { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.7); color: white; padding: 15px 0; font-size: 18px; font-weight: bold; }
+    .prev, .next { cursor: pointer; position: absolute; top: 50%; width: 50px; height: 50px; margin-top: -25px; color: white; background: rgba(0,0,0,0.4); border: none; border-radius: 50%; font-size: 24px; display: flex; align-items: center; justify-content: center; z-index: 10; }
+    .next { right: 15px; } .prev { left: 15px; }
+
+    /* 하단 연락처 (이동 목적지) */
+    footer { padding: 80px 20px; text-align: center; background: #1a472a; color: white; }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero-bg">
+      <img src="./src/assets/panorama.jpg" onerror="this.src='https://via.placeholder.com/1200x800?text=Dragon+Hills+Panorama'">
+    </div>
+    <div class="hero-content">
+      <h1>드래곤 힐스 C.C.</h1>
+      <p>매 홀이 새로운 게임, 태국 라차부리의 완벽한 몰입</p>
+      <a href="#reservation-target" class="cta-btn">실시간 예약하기</a>
+    </div>
+  </header>
+
+  <section class="features">
+    <div class="feature-card">
+      <div class="feature-icon"><i class="fas fa-tree"></i></div>
+      <h3>프라이빗 코스</h3>
+      <p>숲으로 완전히 분리되어 방해받지 않는 독보적인 집중력을 제공합니다.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><i class="fas fa-utensils"></i></div>
+      <h3>명품 한식 뷔페</h3>
+      <p>한국인 주방장이 선사하는 고단백 건강식과 열대 과일을 즐기세요.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><i class="fas fa-hotel"></i></div>
+      <h3>최고급 호텔 숙박</h3>
+      <p>클럽하우스와 인접하여 이동이 편리한 현대적인 객실을 제공합니다.</p>
+    </div>
+  </section>
+
+  <section class="gallery-section">
+    <h2 style="color: #1a472a;">코스 갤러리</h2>
+    <div class="slider-container">
+      <div class="slides" style="display: block;">
+        <img src="hole1.jpg" onerror="this.src='hole1.JPG';">
+        <div class="slide-text">1번 홀 (Hole 1)</div>
+      </div>
+      <div class="slides">
+        <img src="hole2.jpg" onerror="this.src='hole2.JPG';">
+        <div class="slide-text">2번 홀 (Hole 2)</div>
+      </div>
+      <div class="slides">
+        <img src="hole3.jpg" onerror="this.src='hole3.JPG';">
+        <div class="slide-text">3번 홀 (Hole 3)</div>
+      </div>
+      <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
+      <button class="next" onclick="plusSlides(1)">&#10095;</button>
+    </div>
+  </section>
+
+  <footer id="reservation-target">
+    <h2>실시간 예약 및 문의</h2>
+    <p>070-8997-3976</p>
+    <p>태국 현지 한국인 직원이 친절히 상담해 드립니다.</p>
+  </footer>
+
+  <script>
+    let slideIndex = 1;
+    function plusSlides(n) { showSlides(slideIndex += n); }
+    function showSlides(n) {
+      let slides = document.getElementsByClassName("slides");
+      if (n > slides.length) {slideIndex = 1}    
+      if (n < 1) {slideIndex = slides.length}
+      for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
+      slides[slideIndex-1].style.display = "block";  
+    }
+  </script>
+</body>
+</html>
