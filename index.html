@@ -3,88 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>드래곤 힐스 C.C. - 홀별 코스 안내</title>
+  <title>드래곤 힐스 C.C. - 코스 안내</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="./src/style.css">
   <style>
-    /* 슬라이드 디자인 전용 스타일 */
-    .slider-container { position: relative; width: 100%; max-width: 800px; margin: 30px auto; overflow: hidden; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
-    .slides { display: none; width: 100%; position: relative; }
-    .slides img { width: 100%; height: 450px; object-fit: cover; display: block; }
-    .slide-text { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.6); color: white; padding: 20px; text-align: center; font-size: 18px; }
+    /* 슬라이더 전체 박스 */
+    .slider-container { position: relative; width: 100%; max-width: 850px; margin: 40px auto; overflow: hidden; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); background: #f9f9f9; }
+    .slides { display: none; width: 100%; text-align: center; position: relative; }
+    
+    /* 사진 스타일 */
+    .slides img { width: 100%; height: 500px; object-fit: cover; display: block; }
+    
+    /* 사진 위 텍스트 */
+    .slide-text { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.6); color: white; padding: 20px; font-size: 20px; font-weight: bold; }
     
     /* 화살표 버튼 */
-    .prev, .next { cursor: pointer; position: absolute; top: 50%; width: auto; padding: 16px; margin-top: -30px; color: white; font-weight: bold; font-size: 30px; transition: 0.3s; border-radius: 50%; user-select: none; background: rgba(26,71,42,0.5); border: none; z-index: 10; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; }
-    .next { right: 15px; }
-    .prev { left: 15px; }
-    .prev:hover, .next:hover { background: rgba(26,71,42,0.9); }
+    .prev, .next { cursor: pointer; position: absolute; top: 50%; width: 50px; height: 50px; margin-top: -25px; color: white; background: rgba(26,71,42,0.7); border: none; border-radius: 50%; font-size: 24px; display: flex; align-items: center; justify-content: center; z-index: 10; transition: 0.3s; }
+    .next { right: 20px; }
+    .prev { left: 20px; }
+    .prev:hover, .next:hover { background: rgba(26,71,42,1); transform: scale(1.1); }
     
     /* 애니메이션 */
-    .fade { animation: fadeEffect 0.5s; }
-    @keyframes fadeEffect { from {opacity: 0.4} to {opacity: 1} }
+    .fade { animation: fadeEffect 0.6s; }
+    @keyframes fadeEffect { from {opacity: 0.5} to {opacity: 1} }
   </style>
 </head>
 <body>
   <nav class="top-nav">
     <a href="index.html" class="nav-logo">Dragon Hills</a>
-    <div class="nav-links">
-      <p style="color: white; margin-right: 20px;">문의: 070-8997-3976</p>
-    </div>
+    <p style="color: white; margin-right: 20px; font-size: 14px;">문의: 070-8997-3976</p>
   </nav>
 
-  <header class="hero" style="height: 300px;">
-    <div class="hero-content fade-in">
-      <h1>프라이빗 코스 안내</h1>
-      <p>드래곤 힐스의 독보적인 18홀을 미리 만나보세요</p>
-    </div>
-  </header>
-
-  <section class="features" style="display: block; text-align: center; padding: 40px 20px;">
-    <h2 style="color: #1a472a; margin-bottom: 10px;">Hole by Hole Gallery</h2>
-    <p style="color: #666; margin-bottom: 30px;">화살표를 클릭하여 각 홀의 전경을 확인하세요.</p>
-    
-    <div class="slider-container">
-      <div class="slides fade" style="display: block;">
-        <img src="hole1.jpg" alt="1번 홀" onerror="this.src='https://via.placeholder.com/800x450?text=Hole+1+Photo+Ready'">
-        <div class="slide-text"><strong>1번 홀 (Hole 1)</strong> - 숲으로 완전히 분리되어 집중력을 높여주는 시작</div>
-      </div>
-      
-      <div class="slides fade">
-        <img src="hole2.jpg" alt="2번 홀" onerror="this.src='https://via.placeholder.com/800x450?text=Hole+2+Photo+Ready'">
-        <div class="slide-text"><strong>2번 홀 (Hole 2)</strong> - 전략적인 벙커 배치가 돋보이는 명품 코스</div>
-      </div>
-      
-      <div class="slides fade">
-        <img src="hole3.jpg" alt="3번 홀" onerror="this.src='https://via.placeholder.com/800x450?text=Hole+3+Photo+Ready'">
-        <div class="slide-text"><strong>3번 홀 (Hole 3)</strong> - 정교한 아이언 샷이 필요한 아름다운 파3 홀</div>
-      </div>
-
-      <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
-      <button class="next" onclick="plusSlides(1)">&#10095;</button>
-    </div>
-  </section>
-
-  <footer style="background: #1a472a; color: white; padding: 40px 20px; text-align: center;">
-    <p>Dragon Hills C.C. | Ratchaburi, Thailand</p>
-    <p>Tel: 070-8997-3976 | Email: contact@dragonhillscc.com</p>
-    <p style="margin-top: 20px; font-size: 14px; opacity: 0.7;">&copy; 2026 Dragon Hills Golf & Country Club.</p>
-  </footer>
-
-  <script>
-    let slideIndex = 1;
-    function plusSlides(n) {
-      showSlides(slideIndex += n);
-    }
-    function showSlides(n) {
-      let i;
-      let slides = document.getElementsByClassName("slides");
-      if (n > slides.length) {slideIndex = 1}    
-      if (n < 1) {slideIndex = slides.length}
-      for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";  
-      }
-      slides[slideIndex-1].style.display = "block";  
-    }
-  </script>
-</body>
-</html>
+  <section style="text-align: center; padding: 60px 20px;">
+    <h2 style="color: #1a472a; font-size: 32px; margin-bottom: 10px;">프라이빗 코스 (Hole 1 ~ 3)</h2>
+    <p style="color: #666; margin-bottom: 20px;">좌우 화살표를 눌러 드래곤 힐
