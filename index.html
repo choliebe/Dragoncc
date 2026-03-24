@@ -36,4 +36,84 @@
     
     /* 화살표 버튼 */
     .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.4); color: white; border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; font-size: 20px; z-index: 10; display: flex; align-items: center; justify-content: center; }
-    .prev { left: 15px; } .next { right: 15
+    .prev { left: 15px; } .next { right: 15px; }
+
+    /* 5. 하단 예약 안내 (문의처) */
+    footer { padding: 70px 20px; text-align: center; background: #1a472a; color: white; }
+    footer h2 { margin-bottom: 20px; }
+    .tel { font-size: 1.5rem; font-weight: bold; background: #fff; color: #1a472a; display: inline-block; padding: 10px 20px; border-radius: 10px; margin-top: 10px; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero-bg">
+      <img src="./src/assets/panorama.jpg" onerror="this.src='https://via.placeholder.com/1200x800?text=Dragon+Hills+Panorama'">
+    </div>
+    <div class="hero-content">
+      <h1>드래곤 힐스 C.C.</h1>
+      <p>매 홀이 새로운 게임, 태국 라차부리의 완벽한 몰입</p>
+      <a href="#reservation" class="cta-btn">실시간 예약하기</a>
+    </div>
+  </header>
+
+  <section class="features">
+    <div class="card">
+      <i class="fas fa-tree"></i>
+      <h3>프라이빗 코스</h3>
+      <p>독보적인 집중력을 제공합니다.</p>
+    </div>
+    <div class="card">
+      <i class="fas fa-utensils"></i>
+      <h3>명품 한식 뷔페</h3>
+      <p>한국인 주방장이 선사하는 고단백 건강식.</p>
+    </div>
+    <div class="card">
+      <i class="fas fa-hotel"></i>
+      <h3>최고급 호텔 숙박</h3>
+      <p>라운딩 전후 편리한 현대적 호텔 객실.</p>
+    </div>
+  </section>
+
+  <section class="gallery-section">
+    <h2>코스 전경 갤러리</h2>
+    <div class="slider-box">
+      <div class="slide" style="display: block;">
+        <img src="hole1.jpg" onerror="this.src='hole1.JPG'; this.onerror=function(){this.src='https://via.placeholder.com/800x500?text=Check+Photo+1';}">
+        <div class="slide-text">1번 홀 (Hole 1) 전경</div>
+      </div>
+      <div class="slide">
+        <img src="hole2.jpg" onerror="this.src='hole2.JPG'; this.onerror=function(){this.src='https://via.placeholder.com/800x500?text=Check+Photo+2';}">
+        <div class="slide-text">2번 홀 (Hole 2) 전경</div>
+      </div>
+      <div class="slide">
+        <img src="hole3.jpg" onerror="this.src='hole3.JPG'; this.onerror=function(){this.src='https://via.placeholder.com/800x500?text=Check+Photo+3';}">
+        <div class="slide-text">3번 홀 (Hole 3) 전경</div>
+      </div>
+
+      <button class="nav-btn prev" onclick="moveSlide(-1)">❮</button>
+      <button class="nav-btn next" onclick="moveSlide(1)">❯</button>
+    </div>
+  </section>
+
+  <footer id="reservation">
+    <h2>실시간 예약 및 견적 문의</h2>
+    <p>아래 연락처로 전화 주시면 한국인 직원이 안내해 드립니다.</p>
+    <a href="tel:070-8997-3976" class="tel">📞 070-8997-3976</a>
+    <p style="margin-top: 30px; opacity: 0.7; font-size: 13px;">Dragon Hills Golf & Country Club | Ratchaburi, Thailand</p>
+  </footer>
+
+  <script>
+    // 슬라이더 제어 스크립트
+    let currentIdx = 0;
+    function moveSlide(n) {
+      let slides = document.getElementsByClassName("slide");
+      slides[currentIdx].style.display = "none"; // 현재 사진 숨기기
+      currentIdx += n;
+      if (currentIdx >= slides.length) currentIdx = 0; // 마지막이면 처음으로
+      if (currentIdx < 0) currentIdx = slides.length - 1; // 처음이면 마지막으로
+      slides[currentIdx].style.display = "block"; // 새 사진 보여주기
+    }
+  </script>
+</body>
+</html>
