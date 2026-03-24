@@ -1,119 +1,72 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>드래곤 힐스 C.C. - 태국 명문 골프장</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    /* 1. 기본 레이아웃 및 폰트 */
-    body { margin: 0; padding: 0; font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; line-height: 1.6; background-color: #fff; scroll-behavior: smooth; }
-    
-    /* 2. 사장님이 좋아하시는 첫 번째 전경 화면 (히어로 섹션) */
-    .hero { height: 70vh; min-height: 400px; display: flex; align-items: center; justify-content: center; text-align: center; color: white; position: relative; background: #000; }
-    .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
-    .hero-bg img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.5); }
-    .hero-content { position: relative; z-index: 2; padding: 0 20px; }
-    .hero-content h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-    .hero-content p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 30px; }
-    
-    /* 실시간 예약하기 버튼 */
-    .cta-btn { display: inline-block; padding: 15px 35px; background: #1a472a; color: white; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 1.1rem; border: 2px solid #fff; transition: 0.3s; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>드래곤 힐스 C.C.</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { margin: 0; padding: 0; font-family: sans-serif; line-height: 1.6; }
+        /* 1. 첫 화면 배경 전경 */
+        .hero { height: 65vh; position: relative; display: flex; align-items: center; justify-content: center; color: white; text-align: center; background: #1a472a; }
+        .hero img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.5; z-index: 1; }
+        .hero-content { position: relative; z-index: 2; padding: 20px; }
+        .cta-btn { display: inline-block; padding: 12px 30px; background: #c5a059; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; margin-top: 15px; }
 
-    /* 3. 특징 3개 카드 섹션 (프라이빗 코스, 명품 한식, 호텔 숙박) */
-    .features { display: flex; justify-content: center; padding: 50px 15px; background: #fff; flex-wrap: wrap; gap: 20px; }
-    .card { width: 300px; text-align: center; padding: 30px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); border: 1px solid #f2f2f2; }
-    .card i { font-size: 40px; color: #1a472a; margin-bottom: 20px; }
-    .card h3 { color: #333; margin-bottom: 15px; }
+        /* 2. 3개 특징 카드 */
+        .features { display: flex; flex-wrap: wrap; justify-content: center; padding: 40px 10px; gap: 20px; }
+        .card { width: 280px; text-align: center; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #eee; }
+        .card i { font-size: 35px; color: #1a472a; margin-bottom: 15px; }
 
-    /* 4. [핵심] 갤러리 슬라이더 */
-    .gallery-section { padding: 50px 15px; background: #f9f9f9; text-align: center; }
-    .gallery-section h2 { color: #1a472a; margin-bottom: 30px; }
-    .slider-box { max-width: 800px; margin: 0 auto; position: relative; overflow: hidden; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); background: #eee; }
-    .slide { display: none; width: 100%; }
-    .slide img { width: 100%; height: auto; min-height: 280px; display: block; object-fit: cover; }
-    .slide-text { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.7); color: white; padding: 12px 0; font-size: 16px; }
-    
-    /* 화살표 버튼 */
-    .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.4); color: white; border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; font-size: 20px; z-index: 10; display: flex; align-items: center; justify-content: center; }
-    .prev { left: 15px; } .next { right: 15px; }
-
-    /* 5. 하단 예약 안내 (문의처) */
-    footer { padding: 70px 20px; text-align: center; background: #1a472a; color: white; }
-    footer h2 { margin-bottom: 20px; }
-    .tel { font-size: 1.5rem; font-weight: bold; background: #fff; color: #1a472a; display: inline-block; padding: 10px 20px; border-radius: 10px; margin-top: 10px; text-decoration: none; }
-  </style>
+        /* 3. 코스 사진 슬라이더 */
+        .slider-section { padding: 40px 10px; background: #f9f9f9; text-align: center; }
+        .slider-box { max-width: 600px; margin: 0 auto; position: relative; overflow: hidden; border-radius: 15px; background: #ddd; }
+        .slide { display: none; width: 100%; }
+        .slide img { width: 100%; height: auto; display: block; min-height: 250px; }
+        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; padding: 10px; cursor: pointer; border-radius: 50%; width: 40px; height: 40px; }
+    </style>
 </head>
 <body>
 
-  <header class="hero">
-    <div class="hero-bg">
-      <img src="./src/assets/panorama.jpg" onerror="this.src='https://via.placeholder.com/1200x800?text=Dragon+Hills+Panorama'">
-    </div>
-    <div class="hero-content">
-      <h1>드래곤 힐스 C.C.</h1>
-      <p>매 홀이 새로운 게임, 태국 라차부리의 완벽한 몰입</p>
-      <a href="#reservation" class="cta-btn">실시간 예약하기</a>
-    </div>
-  </header>
+    <header class="hero">
+        <img src="./src/assets/panorama.jpg" onerror="this.style.display='none'">
+        <div class="hero-content">
+            <h1>드래곤 힐스 C.C.</h1>
+            <p>태국 라차부리의 완벽한 골프 파라다이스</p>
+            <a href="#footer" class="cta-btn">실시간 예약하기</a>
+        </div>
+    </header>
 
-  <section class="features">
-    <div class="card">
-      <i class="fas fa-tree"></i>
-      <h3>프라이빗 코스</h3>
-      <p>독보적인 집중력을 제공합니다.</p>
-    </div>
-    <div class="card">
-      <i class="fas fa-utensils"></i>
-      <h3>명품 한식 뷔페</h3>
-      <p>한국인 주방장이 선사하는 고단백 건강식.</p>
-    </div>
-    <div class="card">
-      <i class="fas fa-hotel"></i>
-      <h3>최고급 호텔 숙박</h3>
-      <p>라운딩 전후 편리한 현대적 호텔 객실.</p>
-    </div>
-  </section>
+    <section class="features">
+        <div class="card"><i class="fas fa-tree"></i><h3>프라이빗 코스</h3><p>독보적인 집중력을 제공합니다.</p></div>
+        <div class="card"><i class="fas fa-utensils"></i><h3>명품 한식 뷔페</h3><p>한국인 주방장이 선사하는 건강식.</p></div>
+        <div class="card"><i class="fas fa-hotel"></i><h3>최고급 숙박</h3><p>편안한 휴식을 약속합니다.</p></div>
+    </section>
 
-  <section class="gallery-section">
-    <h2>코스 전경 갤러리</h2>
-    <div class="slider-box">
-      <div class="slide" style="display: block;">
-        <img src="hole1.jpg" onerror="this.src='hole1.JPG'; this.onerror=function(){this.src='https://via.placeholder.com/800x500?text=Check+Photo+1';}">
-        <div class="slide-text">1번 홀 (Hole 1) 전경</div>
-      </div>
-      <div class="slide">
-        <img src="hole2.jpg" onerror="this.src='hole2.JPG'; this.onerror=function(){this.src='https://via.placeholder.com/800x500?text=Check+Photo+2';}">
-        <div class="slide-text">2번 홀 (Hole 2) 전경</div>
-      </div>
-      <div class="slide">
-        <img src="hole3.jpg" onerror="this.src='hole3.JPG'; this.onerror=function(){this.src='https://via.placeholder.com/800x500?text=Check+Photo+3';}">
-        <div class="slide-text">3번 홀 (Hole 3) 전경</div>
-      </div>
+    <section class="slider-section">
+        <h2 style="color: #1a472a;">코스 갤러리</h2>
+        <div class="slider-box">
+            <div class="slide" style="display: block;"><img src="hole1.jpg" onerror="this.src='https://via.placeholder.com/600x400?text=Photo1'"></div>
+            <div class="slide"><img src="hole2.jpg" onerror="this.src='https://via.placeholder.com/600x400?text=Photo2'"></div>
+            <div class="slide"><img src="hole3.jpg" onerror="this.src='https://via.placeholder.com/600x400?text=Photo3'"></div>
+            <button class="nav-btn" style="left: 10px;" onclick="change(-1)">❮</button>
+            <button class="nav-btn" style="right: 10px;" onclick="change(1)">❯</button>
+        </div>
+    </section>
 
-      <button class="nav-btn prev" onclick="moveSlide(-1)">❮</button>
-      <button class="nav-btn next" onclick="moveSlide(1)">❯</button>
-    </div>
-  </section>
+    <footer id="footer" style="padding: 60px 20px; text-align: center; background: #1a472a; color: white;">
+        <h2>예약 문의: 070-8997-3976</h2>
+        <p>Copyright © 2026 Dragon Hills. All Rights Reserved.</p>
+    </footer>
 
-  <footer id="reservation">
-    <h2>실시간 예약 및 견적 문의</h2>
-    <p>아래 연락처로 전화 주시면 한국인 직원이 안내해 드립니다.</p>
-    <a href="tel:070-8997-3976" class="tel">📞 070-8997-3976</a>
-    <p style="margin-top: 30px; opacity: 0.7; font-size: 13px;">Dragon Hills Golf & Country Club | Ratchaburi, Thailand</p>
-  </footer>
-
-  <script>
-    // 슬라이더 제어 스크립트
-    let currentIdx = 0;
-    function moveSlide(n) {
-      let slides = document.getElementsByClassName("slide");
-      slides[currentIdx].style.display = "none"; // 현재 사진 숨기기
-      currentIdx += n;
-      if (currentIdx >= slides.length) currentIdx = 0; // 마지막이면 처음으로
-      if (currentIdx < 0) currentIdx = slides.length - 1; // 처음이면 마지막으로
-      slides[currentIdx].style.display = "block"; // 새 사진 보여주기
-    }
-  </script>
+    <script>
+        let idx = 0;
+        function change(n) {
+            let slides = document.getElementsByClassName("slide");
+            slides[idx].style.display = "none";
+            idx = (idx + n + slides.length) % slides.length;
+            slides[idx].style.display = "block";
+        }
+    </script>
 </body>
 </html>
