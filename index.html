@@ -3,70 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>드래곤 힐스 C.C.</title>
+    <title>드래곤 힐스 C.C. - 태국 명문 골프장</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { margin: 0; padding: 0; font-family: sans-serif; line-height: 1.6; }
-        /* 1. 첫 화면 배경 전경 */
-        .hero { height: 65vh; position: relative; display: flex; align-items: center; justify-content: center; color: white; text-align: center; background: #1a472a; }
+        body { margin: 0; padding: 0; font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; scroll-behavior: smooth; }
+        
+        /* 1. 상단 배경 전경 (사장님이 좋아하시는 스타일) */
+        .hero { height: 65vh; position: relative; display: flex; align-items: center; justify-content: center; color: white; text-align: center; background: #000; }
         .hero img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.5; z-index: 1; }
         .hero-content { position: relative; z-index: 2; padding: 20px; }
-        .cta-btn { display: inline-block; padding: 12px 30px; background: #c5a059; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; margin-top: 15px; }
+        .hero-content h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .cta-btn { display: inline-block; padding: 15px 35px; background: #c5a059; color: white; text-decoration: none; border-radius: 30px; font-weight: bold; margin-top: 20px; border: none; font-size: 1.1rem; }
 
-        /* 2. 3개 특징 카드 */
-        .features { display: flex; flex-wrap: wrap; justify-content: center; padding: 40px 10px; gap: 20px; }
-        .card { width: 280px; text-align: center; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #eee; }
-        .card i { font-size: 35px; color: #1a472a; margin-bottom: 15px; }
+        /* 2. 특징 카드 3개 */
+        .features { display: flex; flex-wrap: wrap; justify-content: center; padding: 50px 10px; gap: 25px; background: #fff; }
+        .card { width: 300px; text-align: center; padding: 35px 20px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #f0f0f0; }
+        .card i { font-size: 40px; color: #1a472a; margin-bottom: 20px; }
+        .card h3 { color: #333; margin-bottom: 15px; }
 
-        /* 3. 코스 사진 슬라이더 */
-        .slider-section { padding: 40px 10px; background: #f9f9f9; text-align: center; }
-        .slider-box { max-width: 600px; margin: 0 auto; position: relative; overflow: hidden; border-radius: 15px; background: #ddd; }
+        /* 3. 코스 갤러리 슬라이더 */
+        .slider-section { padding: 50px 15px; background: #f9f9f9; text-align: center; }
+        .slider-box { max-width: 800px; margin: 0 auto; position: relative; overflow: hidden; border-radius: 20px; background: #eee; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
         .slide { display: none; width: 100%; }
-        .slide img { width: 100%; height: auto; display: block; min-height: 250px; }
-        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; padding: 10px; cursor: pointer; border-radius: 50%; width: 40px; height: 40px; }
+        .slide img { width: 100%; height: auto; display: block; min-height: 280px; object-fit: cover; }
+        .slide-text { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.7); color: white; padding: 12px 0; font-size: 16px; font-weight: bold; }
+        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; z-index: 10; }
+        .prev { left: 15px; } .next { right: 15px; }
+
+        /* 4. 하단 예약 문의 (번호 수정 완료) */
+        footer { padding: 80px 20px; text-align: center; background: #1a472a; color: white; }
+        .tel-link { font-size: 1.6rem; font-weight: bold; color: #c5a059; text-decoration: none; display: block; margin-top: 15px; }
     </style>
 </head>
 <body>
 
     <header class="hero">
-        <img src="./src/assets/panorama.jpg" onerror="this.style.display='none'">
+        <img src="./src/assets/panorama.jpg" onerror="this.src='https://via.placeholder.com/1200x800?text=Dragon+Hills+C.C.'">
         <div class="hero-content">
             <h1>드래곤 힐스 C.C.</h1>
-            <p>태국 라차부리의 완벽한 골프 파라다이스</p>
-            <a href="#footer" class="cta-btn">실시간 예약하기</a>
-        </div>
-    </header>
-
-    <section class="features">
-        <div class="card"><i class="fas fa-tree"></i><h3>프라이빗 코스</h3><p>독보적인 집중력을 제공합니다.</p></div>
-        <div class="card"><i class="fas fa-utensils"></i><h3>명품 한식 뷔페</h3><p>한국인 주방장이 선사하는 건강식.</p></div>
-        <div class="card"><i class="fas fa-hotel"></i><h3>최고급 숙박</h3><p>편안한 휴식을 약속합니다.</p></div>
-    </section>
-
-    <section class="slider-section">
-        <h2 style="color: #1a472a;">코스 갤러리</h2>
-        <div class="slider-box">
-            <div class="slide" style="display: block;"><img src="hole1.jpg" onerror="this.src='https://via.placeholder.com/600x400?text=Photo1'"></div>
-            <div class="slide"><img src="hole2.jpg" onerror="this.src='https://via.placeholder.com/600x400?text=Photo2'"></div>
-            <div class="slide"><img src="hole3.jpg" onerror="this.src='https://via.placeholder.com/600x400?text=Photo3'"></div>
-            <button class="nav-btn" style="left: 10px;" onclick="change(-1)">❮</button>
-            <button class="nav-btn" style="right: 10px;" onclick="change(1)">❯</button>
-        </div>
-    </section>
-
-    <footer id="footer" style="padding: 60px 20px; text-align: center; background: #1a472a; color: white;">
-        <h2>예약 문의: 070-8997-3976</h2>
-        <p>Copyright © 2026 Dragon Hills. All Rights Reserved.</p>
-    </footer>
-
-    <script>
-        let idx = 0;
-        function change(n) {
-            let slides = document.getElementsByClassName("slide");
-            slides[idx].style.display = "none";
-            idx = (idx + n + slides.length) % slides.length;
-            slides[idx].style.display = "block";
-        }
-    </script>
-</body>
-</html>
+            <p>태국 라차부리의 완벽한 골
