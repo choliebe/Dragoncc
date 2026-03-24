@@ -2,38 +2,69 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>드래곤 힐스 C.C. - 코스 안내</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="./src/style.css">
   <style>
-    /* 슬라이더 전체 박스 */
-    .slider-container { position: relative; width: 100%; max-width: 850px; margin: 40px auto; overflow: hidden; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); background: #f9f9f9; }
-    .slides { display: none; width: 100%; text-align: center; position: relative; }
+    /* 모바일 우선 디자인 */
+    .slider-container { position: relative; width: 95%; max-width: 850px; margin: 20px auto; overflow: hidden; border-radius: 10px; background: #000; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+    .slides { display: none; width: 100%; text-align: center; }
     
-    /* 사진 스타일 */
-    .slides img { width: 100%; height: 500px; object-fit: cover; display: block; }
+    /* 사진: 휴대폰에서는 높이를 적절히 조절 (가로세로 비율 유지) */
+    .slides img { width: 100%; height: auto; min-height: 250px; max-height: 500px; object-fit: cover; display: block; }
     
-    /* 사진 위 텍스트 */
-    .slide-text { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.6); color: white; padding: 20px; font-size: 20px; font-weight: bold; }
+    /* 설명 텍스트: 모바일에서 글자가 너무 크지 않게 조절 */
+    .slide-text { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.7); color: white; padding: 12px; font-size: 16px; font-weight: 500; }
     
-    /* 화살표 버튼 */
-    .prev, .next { cursor: pointer; position: absolute; top: 50%; width: 50px; height: 50px; margin-top: -25px; color: white; background: rgba(26,71,42,0.7); border: none; border-radius: 50%; font-size: 24px; display: flex; align-items: center; justify-content: center; z-index: 10; transition: 0.3s; }
-    .next { right: 20px; }
-    .prev { left: 20px; }
-    .prev:hover, .next:hover { background: rgba(26,71,42,1); transform: scale(1.1); }
+    /* 화살표: 휴대폰에서 터치하기 쉽게 위치와 크기 조정 */
+    .prev, .next { cursor: pointer; position: absolute; top: 50%; width: 44px; height: 44px; margin-top: -22px; color: white; background: rgba(26,71,42,0.8); border: none; border-radius: 50%; font-size: 20px; display: flex; align-items: center; justify-content: center; z-index: 10; -webkit-tap-highlight-color: transparent; }
+    .next { right: 10px; }
+    .prev { left: 10px; }
     
-    /* 애니메이션 */
-    .fade { animation: fadeEffect 0.6s; }
-    @keyframes fadeEffect { from {opacity: 0.5} to {opacity: 1} }
+    /* 제목 스타일 */
+    .course-title { color: #1a472a; font-size: 24px; margin: 30px 0 10px 0; font-weight: bold; }
   </style>
 </head>
 <body>
   <nav class="top-nav">
     <a href="index.html" class="nav-logo">Dragon Hills</a>
-    <p style="color: white; margin-right: 20px; font-size: 14px;">문의: 070-8997-3976</p>
+    <span style="color:white; font-size:12px; margin-right:15px;">070-8997-3976</span>
   </nav>
 
-  <section style="text-align: center; padding: 60px 20px;">
-    <h2 style="color: #1a472a; font-size: 32px; margin-bottom: 10px;">프라이빗 코스 (Hole 1 ~ 3)</h2>
-    <p style="color: #666; margin-bottom: 20px;">좌우 화살표를 눌러 드래곤 힐
+  <section style="text-align: center; padding: 10px;">
+    <h2 class="course-title">코스 갤러리 (1~3번 홀)</h2>
+    <p style="color: #666; font-size: 14px; margin-bottom: 15px;">화살표를 눌러 사진을 넘겨보세요</p>
+    
+    <div class="slider-container">
+      <div class="slides fade" style="display: block;">
+        <img src="hole1.jpg" alt="1번 홀" onerror="this.src='https://via.placeholder.com/800x500?text=Hole+1+Photo'">
+        <div class="slide-text">1번 홀 (Hole 1)</div>
+      </div>
+      <div class="slides fade">
+        <img src="hole2.jpg" alt="2번 홀" onerror="this.src='https://via.placeholder.com/800x450?text=Hole+2+Photo'">
+        <div class="slide-text">2번 홀 (Hole 2)</div>
+      </div>
+      <div class="slides fade">
+        <img src="hole3.jpg" alt="3번 홀" onerror="this.src='https://via.placeholder.com/800x450?text=Hole+3+Photo'">
+        <div class="slide-text">3번 홀 (Hole 3)</div>
+      </div>
+
+      <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
+      <button class="next" onclick="plusSlides(1)">&#10095;</button>
+    </div>
+  </section>
+
+  <script>
+    let slideIndex = 1;
+    function plusSlides(n) { showSlides(slideIndex += n); }
+    function showSlides(n) {
+      let slides = document.getElementsByClassName("slides");
+      if (n > slides.length) {slideIndex = 1}    
+      if (n < 1) {slideIndex = slides.length}
+      for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
+      slides[slideIndex-1].style.display = "block";  
+    }
+  </script>
+</body>
+</html>
