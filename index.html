@@ -9,6 +9,7 @@
   <style>
     body { margin: 0; font-family: sans-serif; line-height: 1.6; scroll-behavior: smooth; margin-top: 60px; }
 
+    /* 메뉴 */
     nav {
       position: fixed;
       top: 0;
@@ -25,6 +26,7 @@
       font-weight: bold;
     }
 
+    /* 히어로 */
     .hero {
       height: 60vh;
       display: flex;
@@ -60,6 +62,7 @@
       transform: scale(1.05);
     }
 
+    /* 카드 */
     .features {
       display: flex;
       flex-wrap: wrap;
@@ -75,6 +78,13 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
       text-align: center;
       background: white;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     }
 
     .card img {
@@ -83,8 +93,14 @@
       object-fit: cover;
       border-radius: 10px;
       margin-bottom: 10px;
+      transition: 0.3s;
     }
 
+    .card:hover img {
+      transform: scale(1.1);
+    }
+
+    /* 슬라이더 */
     .slider-box {
       max-width: 600px;
       margin: 40px auto;
@@ -111,6 +127,7 @@
       cursor: pointer;
     }
 
+    /* 예약 */
     .booking {
       padding: 40px;
       text-align: center;
@@ -151,7 +168,53 @@
 <section class="features" id="features">
 
   <div class="card">
-    <img src="course.jpg" onerror="this.src='https://via.placeholder.com/300x200?text=Course'">
+    <img src="hole1.jpg">
     <h3>🌲 프라이빗 코스</h3>
-    <p>조용하
+    <p>조용하고 집중되는 플레이</p>
+  </div>
+
+  <div class="card">
+    <img src="hole2.jpg">
+    <h3>🍴 한식 뷔페</h3>
+    <p>한국인 입맛 완벽 만족</p>
+  </div>
+
+  <div class="card">
+    <img src="hole3.jpg">
+    <h3>🏨 호텔</h3>
+    <p>라운딩 후 편안한 휴식</p>
+  </div>
+
+</section>
+
+<h2 style="text-align:center;">코스 전경</h2>
+<div class="slider-box">
+  <div class="slide" style="display:block;"><img src="hole1.jpg"></div>
+  <div class="slide"><img src="hole2.jpg"></div>
+  <div class="slide"><img src="hole3.jpg"></div>
+
+  <div class="btn-box">
+    <button class="nav-btn" onclick="move(-1)">❮</button>
+    <button class="nav-btn" onclick="move(1)">❯</button>
+  </div>
+</div>
+
+<section class="booking" id="contact">
+  <h2>예약 문의</h2>
+  <input type="text" placeholder="이름">
+  <input type="date">
+  <br>
+  <button onclick="alert('예약 요청 완료!')">예약 보내기</button>
+</section>
+
+<footer>
+  <p>전화: 070-8997-3976</p>
+  <p>태국 현지 한국인 상담 가능</p>
+</footer>
+
+<script>
+  var current = 0;
+
+  function showSlide(n) {
+    var slides = do
 ```
