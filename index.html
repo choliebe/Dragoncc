@@ -3,111 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>드래곤 힐스 C.C. - 실시간 예약 및 문의</title>
+  <title>드래곤 힐스 C.C. - 태국 명문 골프장</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="./src/style.css">
   <style>
-    body { margin: 0; font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; background: #f0f2f1; }
-    .top-nav { background: #1a472a; color: white; padding: 15px; text-align: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    .nav-logo { font-size: 22px; font-weight: bold; color: white; text-decoration: none; display: block; }
-    
-    /* 1. 예약 양식 영역 (최상단) */
-    .reservation-section { padding: 30px 15px; background: #1a472a; color: white; text-align: center; }
-    .res-box { max-width: 500px; margin: 0 auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); color: #333; }
-    .res-box h2 { margin-top: 0; color: #1a472a; font-size: 22px; margin-bottom: 20px; }
-    .form-group { margin-bottom: 15px; text-align: left; }
-    .form-group label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 14px; }
-    .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 16px; }
-    .submit-btn { width: 100%; padding: 15px; background: #c5a059; color: white; border: none; border-radius: 6px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-    .submit-btn:hover { background: #b48f48; }
+    /* 1. 첫 화면 히어로 섹션 (보내주신 이미지 디자인) */
+    .hero { height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; color: white; position: relative; }
+    .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+    .hero-bg img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.5); }
+    .hero-content h1 { font-size: 2.8rem; margin: 0; letter-spacing: 2px; }
+    .hero-content p { font-size: 1.1rem; margin: 15px 0; opacity: 0.9; }
+    .cta-btn { display: inline-block; padding: 12px 25px; background: #1a472a; color: white; text-decoration: none; border-radius: 25px; font-size: 14px; }
 
-    /* 2. 코스 슬라이더 영역 (예약 양식 아래) */
-    .course-section { padding: 40px 15px; text-align: center; }
-    .slider-container { position: relative; width: 100%; max-width: 800px; margin: 20px auto; overflow: hidden; border-radius: 10px; background: #000; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-    .slides { display: none; width: 100%; }
+    /* 2. 3가지 특징 카드 섹션 */
+    .features { display: flex; justify-content: space-around; padding: 40px 15px; background: white; flex-wrap: wrap; gap: 20px; }
+    .feature-card { width: 30%; min-width: 280px; text-align: center; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #f0f0f0; background: #fff; }
+    .feature-icon { font-size: 32px; color: #1a472a; margin-bottom: 15px; background: #f0f4f1; width: 60px; height: 60px; line-height: 60px; border-radius: 50%; margin: 0 auto 15px; }
+
+    /* 3. 갤러리 슬라이더 (추가된 부분) */
+    .gallery-section { padding: 40px 15px; background: #f9f9f9; text-align: center; }
+    .slider-container { position: relative; max-width: 800px; margin: 0 auto; overflow: hidden; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+    .slides { display: none; width: 100%; animation: fade 0.8s; }
     .slides img { width: 100%; height: auto; min-height: 250px; max-height: 500px; object-fit: cover; display: block; }
-    .slide-text { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.7); color: white; padding: 12px 0; font-size: 16px; }
-    
-    /* 화살표 */
-    .prev, .next { cursor: pointer; position: absolute; top: 50%; width: 44px; height: 44px; margin-top: -22px; color: white; background: rgba(0,0,0,0.5); border: none; border-radius: 50%; font-size: 20px; display: flex; align-items: center; justify-content: center; z-index: 10; }
-    .next { right: 10px; }
-    .prev { left: 10px; }
+    .slide-text { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.7); color: white; padding: 12px 0; font-size: 16px; font-weight: bold; }
+    .prev, .next { cursor: pointer; position: absolute; top: 50%; width: 44px; height: 44px; margin-top: -22px; color: white; background: rgba(26,71,42,0.8); border: none; border-radius: 50%; font-size: 20px; display: flex; align-items: center; justify-content: center; z-index: 10; }
+    .next { right: 15px; } .prev { left: 15px; }
+    @keyframes fade { from {opacity: 0.4} to {opacity: 1} }
 
-    footer { padding: 30px; text-align: center; background: #333; color: white; font-size: 13px; }
+    footer { padding: 30px; text-align: center; background: #1a472a; color: white; font-size: 13px; }
   </style>
 </head>
 <body>
 
-  <nav class="top-nav">
-    <a href="#" class="nav-logo">Dragon Hills C.C.</a>
-  </nav>
-
-  <section class="reservation-section">
-    <div class="res-box">
-      <h2>예약 및 견적 문의</h2>
-      <form id="reservationForm">
-        <div class="form-group">
-          <label>예약자 성함</label>
-          <input type="text" placeholder="성함을 입력해주세요" required>
-        </div>
-        <div class="form-group">
-          <label>연락처</label>
-          <input type="tel" placeholder="010-0000-0000" required>
-        </div>
-        <div class="form-group">
-          <label>방문 인원</label>
-          <select required>
-            <option value="">인원을 선택하세요</option>
-            <option value="4">1팀 (4명)</option>
-            <option value="8">2팀 (8명)</option>
-            <option value="단체">단체/기타 문의</option>
-          </select>
-        </div>
-        <button type="submit" class="submit-btn">견적 및 상담 신청하기</button>
-      </form>
-      <p style="margin-top: 15px; font-size: 14px; color: #1a472a; font-weight: bold;">
-        <i class="fas fa-phone"></i> 빠른상담: 070-8997-3976
-      </p>
+  <header class="hero">
+    <div class="hero-bg">
+      <img src="./src/assets/panorama.jpg" onerror="this.src='https://via.placeholder.com/1200x800?text=Dragon+Hills+Panorama'">
     </div>
-  </section>
-
-  <section class="course-section">
-    <h2 style="color: #1a472a; margin-top: 0;">드래곤 힐스 코스 갤러리</h2>
-    <p style="color: #666; font-size: 14px; margin-bottom: 20px;">화살표를 클릭하여 홀별 전경을 확인하세요.</p>
-    
-    <div class="slider-container">
-      <div class="slides fade" style="display: block;">
-        <img src="hole1.jpg" onerror="this.src='./src/assets/hole1.jpg'; this.onerror=function(){this.src='https://via.placeholder.com/800x450?text=Dragon+Hills+Hole+1';}">
-        <div class="slide-text">1번 홀 (Hole 1)</div>
-      </div>
-      <div class="slides fade">
-        <img src="hole2.jpg" onerror="this.src='./src/assets/hole2.jpg';">
-        <div class="slide-text">2번 홀 (Hole 2)</div>
-      </div>
-      <div class="slides fade">
-        <img src="hole3.jpg" onerror="this.src='./src/assets/hole3.jpg';">
-        <div class="slide-text">3번 홀 (Hole 3)</div>
-      </div>
-      <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
-      <button class="next" onclick="plusSlides(1)">&#10095;</button>
+    <div class="hero-content">
+      <h1>드래곤 힐스 C.C.</h1>
+      <p>매 홀이 새로운 게임, 태국 라차부리의 완벽한 몰입</p>
+      <a href="#reservation" class="cta-btn">실시간 예약하기</a>
     </div>
-  </section>
-
-  <footer>
-    <p><strong>Dragon Hills Golf & Country Club</strong></p>
-    <p>Ratchaburi, Thailand | 한국인 상담 전용 라인</p>
-    <p style="opacity: 0.6; margin-top: 10px;">&copy; 2026 Dragon Hills. All Rights Reserved.</p>
-  </footer>
-
-  <script>
-    let slideIndex = 1;
-    function plusSlides(n) { showSlides(slideIndex += n); }
-    function showSlides(n) {
-      let slides = document.getElementsByClassName("slides");
-      if (n > slides.length) {slideIndex = 1}    
-      if (n < 1) {slideIndex = slides.length}
-      for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
-      slides[slideIndex-1].style.display = "block";  
-    }
-  </script>
-</body>
-</html>
+  </header>
