@@ -2,107 +2,76 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>DRAGON HILLS C.C.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>드래곤 힐스 C.C.</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* [1] 기본 설정 - 잘림 방지 */
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { margin: 0; padding: 0; font-family: 'Malgun Gothic', sans-serif; background: #fff; overflow-x: hidden; scroll-behavior: smooth; }
+        * { box-sizing: border-box; }
+        body { margin: 0; padding: 0; font-family: sans-serif; line-height: 1.6; overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* [2] 상단 전경 섹션 */
-        .hero { height: 65vh; min-height: 400px; position: relative; display: flex; align-items: center; justify-content: center; color: white; text-align: center; background: #000; padding: 20px; }
-        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
-        .hero-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
-        
-        .hero-content { position: relative; z-index: 2; width: 100%; }
-        .hero-content h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; letter-spacing: -1px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-        .hero-content p { font-size: 1.1rem; margin-bottom: 30px; opacity: 0.9; }
+        /* [1] 상단 전경 배경 */
+        .hero { height: 60vh; position: relative; display: flex; align-items: center; justify-content: center; color: white; text-align: center; background: #1a472a; }
+        .hero img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.5; z-index: 1; }
+        .hero-content { position: relative; z-index: 2; padding: 20px; }
+        .hero-content h1 { font-size: 2.2rem; margin: 0; }
 
-        /* [3] 실시간 예약 버튼 - 애니메이션 추가 */
+        /* [2] 금색 반짝이는 예약 버튼 */
         .cta-btn { 
-            display: inline-block; 
-            padding: 18px 40px; 
-            background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%); /* 금색 그라데이션 */
-            color: white; 
-            text-decoration: none; 
-            border-radius: 50px; 
-            font-weight: bold; 
-            font-size: 1.2rem; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            border: 2px solid #fff;
-            animation: pulse 2s infinite; /* 버튼이 계속 두근거리는 효과 */
+            display: inline-block; padding: 16px 35px; 
+            background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%); 
+            color: white; text-decoration: none; border-radius: 30px; 
+            font-weight: bold; margin-top: 20px; font-size: 1.1rem;
+            border: 2px solid #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            animation: bounce 2s infinite; 
         }
+        @keyframes bounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
-            50% { transform: scale(1.05); box-shadow: 0 15px 35px rgba(212, 175, 55, 0.5); }
-            100% { transform: scale(1); box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
-        }
+        /* [3] 특징 3개 카드 */
+        .features { display: flex; flex-wrap: wrap; justify-content: center; padding: 40px 10px; gap: 20px; }
+        .card { width: 280px; text-align: center; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #eee; }
+        .card i { font-size: 35px; color: #1a472a; margin-bottom: 15px; }
 
-        /* [4] 특징 카드 디자인 */
-        .features { display: flex; flex-wrap: wrap; justify-content: center; padding: 50px 15px; gap: 20px; }
-        .card { width: 300px; text-align: center; padding: 35px 20px; border-radius: 20px; border: 1px solid #eee; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .card i { font-size: 35px; color: #1a472a; margin-bottom: 20px; }
-        .card h3 { color: #1a472a; margin-bottom: 10px; font-size: 1.3rem; }
+        /* [4] 코스 갤러리 슬라이더 */
+        .slider-section { padding: 40px 15px; background: #f9f9f9; text-align: center; }
+        .slider-box { max-width: 600px; margin: 0 auto; position: relative; overflow: hidden; border-radius: 15px; background: #333; }
+        .slide { display: none; width: 100%; }
+        .slide img { width: 100%; height: auto; display: block; min-height: 250px; }
+        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; z-index: 10; font-size: 20px; }
 
-        /* [5] 슬라이더 디자인 */
-        .slider-section { padding: 50px 10px; background: #f8fbf8; text-align: center; }
-        .slider-box { max-width: 650px; margin: 0 auto; position: relative; overflow: hidden; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); background: #333; }
-        .slide { display: none; width: 100%; aspect-ratio: 4 / 3; }
-        .slide img { width: 100%; height: 100%; object-fit: cover; }
-        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.4); color: #fff; border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; font-size: 20px; z-index: 5; }
-        .prev { left: 15px; } .next { right: 15px; }
-
-        /* [6] 하단 연락처 (070-8098-6781) */
-        footer { padding: 80px 20px; text-align: center; background: #1a472a; color: white; }
-        .tel-link { font-size: 1.8rem; font-weight: 800; color: #d4af37; text-decoration: none; display: block; margin-top: 15px; }
+        /* [5] 하단 예약 문의 (070-8098-6781) */
+        footer { padding: 60px 20px; text-align: center; background: #1a472a; color: white; }
+        .tel-num { font-size: 1.8rem; font-weight: bold; color: #d4af37; text-decoration: none; display: block; margin-top: 15px; border: 2px solid #d4af37; padding: 10px; border-radius: 10px; }
     </style>
 </head>
 <body>
 
     <header class="hero">
-        <div class="hero-bg"><img src="./src/assets/panorama.jpg" onerror="this.src='https://via.placeholder.com/1200x800?text=Dragon+Hills+Panorama'"></div>
+        <img src="./src/assets/panorama.jpg" onerror="this.style.display='none'">
         <div class="hero-content">
             <h1>DRAGON HILLS C.C.</h1>
-            <p>태국 라차부리 명문 골프장의 품격을 경험하세요</p>
+            <p>태국 라차부리 명문 골프장</p>
             <a href="#contact" class="cta-btn">실시간 예약하기</a>
         </div>
     </header>
 
     <section class="features">
-        <div class="card"><i class="fas fa-tree"></i><h3>프라이빗 코스</h3><p>숲으로 완전히 분리된 독보적 공간</p></div>
-        <div class="card"><i class="fas fa-utensils"></i><h3>명품 한식 뷔페</h3><p>한국인 주방장이 선사하는 맛의 감동</p></div>
+        <div class="card"><i class="fas fa-tree"></i><h3>프라이빗 코스</h3><p>숲으로 분리된 독보적 공간</p></div>
+        <div class="card"><i class="fas fa-utensils"></i><h3>명품 한식 뷔페</h3><p>한국인 주방장의 맛의 감동</p></div>
         <div class="card"><i class="fas fa-hotel"></i><h3>최고급 숙박</h3><p>라운딩 후 즐기는 고품격 휴식</p></div>
     </section>
 
     <section class="slider-section">
-        <h2 style="color: #1a472a; margin-bottom: 30px;">코스 전경</h2>
+        <h2 style="color: #1a472a;">코스 전경 갤러리</h2>
         <div class="slider-box">
-            <div class="slide" style="display: block;"><img src="hole1.jpg" onerror="this.src='hole1.JPG';"></div>
-            <div class="slide"><img src="hole2.jpg" onerror="this.src='hole2.JPG';"></div>
-            <div class="slide"><img src="hole3.jpg" onerror="this.src='hole3.JPG';"></div>
-            <button class="nav-btn prev" onclick="moveSlide(-1)">❮</button>
-            <button class="nav-btn next" onclick="moveSlide(1)">❯</button>
+            <div class="slide" style="display: block;"><img src="hole1.jpg" onerror="this.src='hole1.JPG'; this.onerror=function(){this.src='https://via.placeholder.com/600x400?text=Hole+1'}"></div>
+            <div class="slide"><img src="hole2.jpg" onerror="this.src='hole2.JPG'; this.onerror=function(){this.src='https://via.placeholder.com/600x400?text=Hole+2'}"></div>
+            <div class="slide"><img src="hole3.jpg" onerror="this.src='hole3.JPG'; this.onerror=function(){this.src='https://via.placeholder.com/600x400?text=Hole+3'}"></div>
+            <button class="nav-btn" style="left: 10px;" onclick="move(-1)">❮</button>
+            <button class="nav-btn" style="right: 10px;" onclick="move(1)">❯</button>
         </div>
     </section>
 
     <footer id="contact">
         <h2>실시간 예약 및 문의</h2>
-        <p>현지 한국인 매니저가 친절하게 상담해 드립니다.</p>
-        <a href="tel:070-8098-6781" class="tel-link">📞 070-8098-6781</a>
-        <p style="margin-top: 30px; opacity: 0.5; font-size: 12px;">© 2026 Dragon Hills Golf & Country Club.</p>
-    </footer>
-
-    <script>
-        let currentIdx = 0;
-        function moveSlide(n) {
-            let slides = document.getElementsByClassName("slide");
-            if (slides.length === 0) return;
-            slides[currentIdx].style.display = "none";
-            currentIdx = (currentIdx + n + slides.length) % slides.length;
-            slides[currentIdx].style.display = "block";
-        }
-    </script>
-</body>
-</html>
+        <p>현지 매니저가 친절하게 상담해 드립니다.</p>
+        <a href="tel:070-8098-6781" class="tel-num">📞 070-8098-
