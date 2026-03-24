@@ -57,4 +57,46 @@
     <div class="reservation-container" style="max-width: 600px; margin: 0 auto; text-align: center;">
       <h2>예약 및 견적 문의</h2>
       <form id="reservationForm">
-        <div class="form
+        <div class="form-group">
+          <label>성함</label>
+          <input type="text" id="guestName" placeholder="예약자 성함" required>
+        </div>
+        <div class="form-group">
+          <label>연락처</label>
+          <input type="tel" id="guestPhone" placeholder="010-0000-0000" required>
+        </div>
+        <div class="form-group">
+          <label>숙박 인원</label>
+          <select id="guestCount" required>
+            <option value="">인원을 선택하세요</option>
+            <option value="1">1명</option>
+            <option value="2">2명</option>
+            <option value="3">3명</option>
+            <option value="4">4명 (1팀)</option>
+            <option value="5">단체(별도문의)</option>
+          </select>
+        </div>
+        <button type="submit" class="submit-btn">견적 및 가능 일정 확인하기</button>
+      </form>
+      <p style="margin-top: 15px; font-size: 14px; color: #666;">문의전화: 070-8997-3976</p>
+    </div>
+  </section>
+
+  <footer style="background: #1a472a; color: white; padding: 30px 15px; text-align: center; margin-top: 50px;">
+    <p>Dragon Hills C.C. | Ratchaburi, Thailand</p>
+    <p style="font-size: 12px; opacity: 0.8; margin-top: 10px;">&copy; 2026 Dragon Hills Golf & Country Club.</p>
+  </footer>
+
+  <script>
+    let slideIndex = 1;
+    function plusSlides(n) { showSlides(slideIndex += n); }
+    function showSlides(n) {
+      let slides = document.getElementsByClassName("slides");
+      if (n > slides.length) {slideIndex = 1}    
+      if (n < 1) {slideIndex = slides.length}
+      for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
+      slides[slideIndex-1].style.display = "block";  
+    }
+  </script>
+</body>
+</html>
