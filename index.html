@@ -9,7 +9,6 @@
   <style>
     body { margin: 0; font-family: sans-serif; line-height: 1.6; scroll-behavior: smooth; margin-top: 60px; }
 
-    /* 상단 메뉴 */
     nav {
       position: fixed;
       top: 0;
@@ -26,7 +25,6 @@
       font-weight: bold;
     }
 
-    /* 히어로 */
     .hero {
       height: 60vh;
       display: flex;
@@ -62,7 +60,6 @@
       transform: scale(1.05);
     }
 
-    /* 카드 */
     .features {
       display: flex;
       flex-wrap: wrap;
@@ -70,15 +67,24 @@
       gap: 20px;
       padding: 40px;
     }
+
     .card {
       width: 280px;
-      padding: 20px;
+      padding: 15px;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
       text-align: center;
+      background: white;
     }
 
-    /* 슬라이더 */
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
     .slider-box {
       max-width: 600px;
       margin: 40px auto;
@@ -105,7 +111,6 @@
       cursor: pointer;
     }
 
-    /* 예약 폼 */
     .booking {
       padding: 40px;
       text-align: center;
@@ -128,14 +133,12 @@
 
 <body>
 
-<!-- 메뉴 -->
 <nav>
   <a href="#">홈</a>
   <a href="#features">시설</a>
   <a href="#contact">예약</a>
 </nav>
 
-<!-- 메인 -->
 <header class="hero">
   <img src="./src/assets/panorama.jpg" onerror="this.style.display='none'">
   <div class="hero-content">
@@ -145,17 +148,10 @@
   </div>
 </header>
 
-<!-- 카드 -->
 <section class="features" id="features">
-  <div class="card"><h3>🌲 프라이빗 코스</h3><p>조용하고 집중되는 플레이</p></div>
-  <div class="card"><h3>🍴 한식 뷔페</h3><p>한국인 입맛 완벽 만족</p></div>
-  <div class="card"><h3>🏨 호텔</h3><p>라운딩 후 편안한 휴식</p></div>
-</section>
 
-<!-- 슬라이더 -->
-<h2 style="text-align:center;">코스 전경</h2>
-<div class="slider-box">
-  <div class="slide" style="display:block;"><img src="hole1.jpg" onerror="this.src='https://via.placeholder.com/600x400'"></div>
-  <div class="slide"><img src="hole2.jpg" onerror="this.src='https://via.placeholder.com/600x400'"></div>
-  <div class="slide"><img src=
+  <div class="card">
+    <img src="course.jpg" onerror="this.src='https://via.placeholder.com/300x200?text=Course'">
+    <h3>🌲 프라이빗 코스</h3>
+    <p>조용하
 ```
