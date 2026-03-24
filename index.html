@@ -1,80 +1,161 @@
+```html
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>드래곤 힐스 C.C.</title>
+
   <style>
-    /* 기본 레이아웃 */
-    body { margin: 0; padding: 0; font-family: sans-serif; line-height: 1.6; scroll-behavior: smooth; }
-    
-    /* 히어로 섹션 */
-    .hero { height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; color: white; background: #1a472a; position: relative; }
-    .hero img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; opacity: 0.5; }
-    .hero-content { position: relative; z-index: 2; padding: 20px; }
-    
-    /* 예약 버튼 */
-    .cta-btn { display: inline-block; padding: 15px 30px; background: #c5a059; color: white; text-decoration: none; border-radius: 30px; font-weight: bold; margin-top: 20px; border: none; font-size: 18px; }
+    body { margin: 0; font-family: sans-serif; line-height: 1.6; scroll-behavior: smooth; margin-top: 60px; }
 
-    /* 카드 섹션 */
-    .features { display: flex; flex-wrap: wrap; justify-content: center; padding: 40px 10px; background: white; gap: 20px; }
-    .card { width: 280px; text-align: center; padding: 20px; border: 1px solid #eee; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+    /* 상단 메뉴 */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #1a472a;
+      padding: 15px;
+      text-align: center;
+      z-index: 999;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-    /* 갤러리 슬라이더 */
-    .slider-box { max-width: 600px; margin: 40px auto; position: relative; overflow: hidden; border-radius: 10px; background: #f0f0f0; }
-    .slide { display: none; width: 100%; }
-    .slide img { width: 100%; height: auto; display: block; min-height: 250px; }
-    .btn-box { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; transform: translateY(-50%); }
-    .nav-btn { background: rgba(0,0,0,0.5); color: white; border: none; padding: 10px 15px; cursor: pointer; font-size: 20px; }
+    /* 히어로 */
+    .hero {
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      position: relative;
+      background: #1a472a;
+    }
+    .hero img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.5;
+    }
+    .hero-content { position: relative; z-index: 2; }
 
-    /* 하단 정보 */
-    footer { padding: 60px 20px; text-align: center; background: #1a472a; color: white; }
+    .cta-btn {
+      padding: 15px 30px;
+      background: #c5a059;
+      color: white;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 20px;
+      transition: 0.3s;
+    }
+    .cta-btn:hover {
+      background: #a8843d;
+      transform: scale(1.05);
+    }
+
+    /* 카드 */
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 40px;
+    }
+    .card {
+      width: 280px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    /* 슬라이더 */
+    .slider-box {
+      max-width: 600px;
+      margin: 40px auto;
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+    .slide { display: none; }
+    .slide img { width: 100%; }
+
+    .btn-box {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+    .nav-btn {
+      background: rgba(0,0,0,0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    /* 예약 폼 */
+    .booking {
+      padding: 40px;
+      text-align: center;
+      background: #f9f9f9;
+    }
+    input, button {
+      padding: 10px;
+      margin: 5px;
+      width: 200px;
+    }
+
+    footer {
+      background: #1a472a;
+      color: white;
+      padding: 40px;
+      text-align: center;
+    }
   </style>
 </head>
+
 <body>
 
-  <header class="hero">
-    <img src="./src/assets/panorama.jpg" onerror="this.style.display='none'">
-    <div class="hero-content">
-      <h1>드래곤 힐스 C.C.</h1>
-      <p>태국 라차부리의 완벽한 골프 파라다이스</p>
-      <a href="#contact" class="cta-btn">실시간 예약하기</a>
-    </div>
-  </header>
+<!-- 메뉴 -->
+<nav>
+  <a href="#">홈</a>
+  <a href="#features">시설</a>
+  <a href="#contact">예약</a>
+</nav>
 
-  <section class="features">
-    <div class="card"><h3>🌲 프라이빗 코스</h3><p>독보적인 집중력을 제공합니다.</p></div>
-    <div class="card"><h3>🍴 명품 한식 뷔페</h3><p>최고의 한국인 주방장 팀.</p></div>
-    <div class="card"><h3>🏨 최고급 호텔</h3><p>라운딩 후 편안한 휴식.</p></div>
-  </section>
-
-  <h2 style="text-align: center; color: #1a472a;">코스 전경</h2>
-  <div class="slider-box">
-    <div class="slide" style="display: block;"><img src="hole1.jpg" onerror="this.src='https://via.placeholder.com/600x400?text=Photo+Check+1'"></div>
-    <div class="slide"><img src="hole2.jpg" onerror="this.src='https://via.placeholder.com/600x400?text=Photo+Check+2'"></div>
-    <div class="slide"><img src="hole3.jpg" onerror="this.src='https://via.placeholder.com/600x400?text=Photo+Check+3'"></div>
-    <div class="btn-box">
-      <button class="nav-btn" onclick="move(-1)">❮</button>
-      <button class="nav-btn" onclick="move(1)">❯</button>
-    </div>
+<!-- 메인 -->
+<header class="hero">
+  <img src="./src/assets/panorama.jpg" onerror="this.style.display='none'">
+  <div class="hero-content">
+    <h1>드래곤 힐스 C.C.</h1>
+    <p>태국 라차부리 최고의 골프 경험</p>
+    <a href="#contact" class="cta-btn">예약하기</a>
   </div>
+</header>
 
-  <footer id="contact">
-    <h2>실시간 예약 및 문의</h2>
-    <p style="font-size: 20px; font-weight: bold;">전화: 070-8997-3976</p>
-    <p>태국 현지 한국인 직원이 안내해 드립니다.</p>
-  </footer>
+<!-- 카드 -->
+<section class="features" id="features">
+  <div class="card"><h3>🌲 프라이빗 코스</h3><p>조용하고 집중되는 플레이</p></div>
+  <div class="card"><h3>🍴 한식 뷔페</h3><p>한국인 입맛 완벽 만족</p></div>
+  <div class="card"><h3>🏨 호텔</h3><p>라운딩 후 편안한 휴식</p></div>
+</section>
 
-  <script>
-    var current = 0;
-    function move(n) {
-      var slides = document.getElementsByClassName("slide");
-      slides[current].style.display = "none";
-      current += n;
-      if (current >= slides.length) current = 0;
-      if (current < 0) current = slides.length - 1;
-      slides[current].style.display = "block";
-    }
-  </script>
-</body>
-</html>
+<!-- 슬라이더 -->
+<h2 style="text-align:center;">코스 전경</h2>
+<div class="slider-box">
+  <div class="slide" style="display:block;"><img src="hole1.jpg" onerror="this.src='https://via.placeholder.com/600x400'"></div>
+  <div class="slide"><img src="hole2.jpg" onerror="this.src='https://via.placeholder.com/600x400'"></div>
+  <div class="slide"><img src=
+```
