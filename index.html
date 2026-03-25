@@ -7,43 +7,93 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* [1] 기본 설정 */
-        * { box-sizing: border-box; -webkit-text-size-adjust: none; scroll-behavior: smooth; }
+        * { box-sizing: border-box; -webkit-text-size-adjust: none; }
         body { margin: 0; padding: 0; font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; overflow-x: hidden; background: #f8f9fa; }
 
-        /* [2] 상단 전경 */
-        .hero { height: 60vh; min-height: 400px; position: relative; display: flex; align-items: center; justify-content: center; text-align: center; color: white; background: #1a472a; padding: 0 20px; }
-        .hero img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.5; z-index: 1; }
+        /* [2] 상단 영문 타이틀 및 배경 */
+        .hero { height: 50vh; min-height: 350px; position: relative; display: flex; align-items: center; justify-content: center; text-align: center; color: white; background: #1a472a; padding: 0 20px; }
+        .hero img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; z-index: 1; }
         .hero-content { position: relative; z-index: 2; width: 100%; }
         .hero-content h1 { font-size: 2.2rem; font-weight: 800; margin: 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
         
         .cta-btn { 
-            display: inline-block; padding: 18px 40px; 
+            display: inline-block; padding: 15px 35px; 
             background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%); 
             color: white; text-decoration: none; border-radius: 50px; 
-            font-weight: 800; font-size: 1.2rem; margin-top: 25px;
-            border: 2px solid #fff; box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-            animation: bounce 2s infinite; 
+            font-weight: 800; font-size: 1.1rem; margin-top: 20px;
+            border: 2px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
-        @keyframes bounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 
-        /* [3] 특징 카드 */
-        .features { display: flex; flex-wrap: wrap; justify-content: center; padding: 40px 15px; gap: 15px; }
+        /* [3] 특징 카드 섹션 */
+        .features { display: flex; flex-wrap: wrap; justify-content: center; padding: 30px 15px; gap: 10px; }
         .card { 
-            width: 100%; max-width: 320px; text-align: center; padding: 30px 15px; border-radius: 15px; 
-            background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #eee; 
-            cursor: pointer; transition: 0.3s;
+            width: 30%; min-width: 100px; text-align: center; padding: 15px 5px; border-radius: 10px; 
+            background: #fff; box-shadow: 0 3px 10px rgba(0,0,0,0.05); border: 1px solid #eee; 
         }
-        .card:hover { transform: translateY(-5px); border-color: #d4af37; }
-        .card i { font-size: 35px; color: #1a472a; margin-bottom: 15px; }
+        .card i { font-size: 24px; color: #1a472a; margin-bottom: 8px; }
+        .card h3 { font-size: 0.9rem; margin: 5px 0; color: #333; }
 
-        /* [4] 클릭 시 나타나는 코스 사진 리스트 */
-        #course-photos { display: none; padding: 20px 15px; text-align: center; background: #fff; }
-        .photo-grid { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
-        .photo-item { position: relative; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .photo-item img { width: 100%; height: auto; display: block; }
-        .photo-item .label { position: absolute; top: 15px; left: 15px; background: rgba(26, 71, 42, 0.8); color: #f7e08a; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; }
+        /* [4] 코스 사진 리스트 (삭제된 갤러리 대신 여기에 바로 표시) */
+        .course-section { padding: 40px 15px; background: #fff; text-align: center; }
+        .course-title { color: #1a472a; font-size: 1.5rem; margin-bottom: 25px; position: relative; display: inline-block; }
+        .course-title::after { content: ''; display: block; width: 50px; height: 3px; background: #d4af37; margin: 10px auto; }
+        
+        .photo-list { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 25px; }
+        .photo-item { position: relative; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 1px solid #ddd; }
+        .photo-item img { width: 100%; height: auto; display: block; transition: 0.3s; }
+        
+        /* 홀 번호 라벨 */
+        .label { position: absolute; top: 15px; left: 15px; background: rgba(26, 71, 42, 0.85); color: #f7e08a; padding: 6px 15px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; z-index: 2; }
 
-        /* [5] 하단 예약 안내 */
+        /* [5] 하단 예약 안내 - 골드 캡슐 스타일 */
         footer { padding: 60px 20px; text-align: center; background: #1a472a; color: white; border-top: 4px solid #d4af37; }
-        .tel-box { display: flex; align-items: center; justify-content: center; margin: 25px auto; padding: 15px 20px; background: linear-gradient(#1a472a, #1a472a) padding-box, linear-gradient(135deg, #d4af37, #f7e08a) border-box; border: 2px solid transparent; border-radius: 50px; width: 90%; max-width: 340px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-        .tel-link { font-size: 1.6rem; font-weight:
+        .tel-box { 
+            display: flex; align-items: center; justify-content: center; 
+            margin: 25px auto; padding: 15px 20px; 
+            background: linear-gradient(#1a472a, #1a472a) padding-box, linear-gradient(135deg, #d4af37, #f7e08a) border-box; 
+            border: 2px solid transparent; border-radius: 50px; 
+            width: 90%; max-width: 340px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
+        }
+        .tel-link { font-size: 1.6rem; font-weight: 900; color: #f7e08a; text-decoration: none; display: flex; align-items: center; gap: 12px; }
+        .tel-link i { font-size: 1.3rem; }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <img src="./src/assets/panorama.jpg" onerror="this.src='https://via.placeholder.com/800x600?text=Dragon+Hills+CC'">
+        <div class="hero-content">
+            <h1>DRAGON HILLS C.C.</h1>
+            <p>태국 명문 골프장의 품격</p>
+            <a href="#contact" class="cta-btn">실시간 예약문의</a>
+        </div>
+    </header>
+
+    <section class="features">
+        <div class="card"><i class="fas fa-tree"></i><h3>Private</h3></div>
+        <div class="card"><i class="fas fa-utensils"></i><h3>K-Food</h3></div>
+        <div class="card"><i class="fas fa-hotel"></i><h3>Hotel</h3></div>
+    </section>
+
+    <section class="course-section">
+        <h2 class="course-title">Course View</h2>
+        <div class="photo-list">
+            <div class="photo-item"><span class="label">Hole 1</span><img src="hole1.jpg" onerror="this.src='hole1.JPG';"></div>
+            <div class="photo-item"><span class="label">Hole 2</span><img src="hole2.jpg" onerror="this.src='hole2.JPG';"></div>
+            <div class="photo-item"><span class="label">Hole 3</span><img src="hole3.jpg" onerror="this.src='hole3.JPG';"></div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <h2>실시간 예약 및 문의</h2>
+        <p style="opacity: 0.8; margin-bottom: 5px;">현지 매니저가 친절하게 상담해 드립니다.</p>
+        <div class="tel-box">
+            <a href="tel:070-8098-6781" class="tel-link">
+                <i class="fas fa-phone"></i> 070.8098.6781
+            </a>
+        </div>
+        <p style="margin-top: 40px; opacity: 0.5; font-size: 11px;">© 2026 Dragon Hills Golf & Country Club.</p>
+    </footer>
+
+</body>
+</html>
