@@ -7,33 +7,114 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* [1] 기본 레이아웃 */
-        * { box-sizing: border-box; }
-        body { margin: 0; padding: 0; font-family: 'Malgun Gothic', sans-serif; background: #f8f9fa; line-height: 1.6; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Malgun Gothic', sans-serif; background: #f8f9fa; color: #333; line-height: 1.6; }
         
-        .hero { height: 50vh; position: relative; display: flex; align-items: center; justify-content: center; text-align: center; color: white; background: #1a472a; }
-        .hero img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.3; z-index: 1; }
+        /* [2] 상단 메인 */
+        .hero { height: 45vh; min-height: 300px; position: relative; display: flex; align-items: center; justify-content: center; text-align: center; color: white; background: #1a472a; }
+        .hero img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; z-index: 1; }
         .hero-content { position: relative; z-index: 2; width: 100%; padding: 0 20px; }
+        .hero-content h1 { font-size: 2.2rem; font-weight: 900; text-transform: uppercase; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
         
-        /* [2] 메인 버튼 */
         .cta-btn { 
-            display: inline-block; padding: 18px 40px; background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%); 
-            color: white; border-radius: 50px; font-weight: 800; font-size: 1.2rem; cursor: pointer; 
-            border: 2px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.3); margin-top: 20px;
+            display: inline-block; padding: 18px 40px; background: #d4af37; color: white; 
+            border-radius: 50px; font-weight: 800; font-size: 1.2rem; cursor: pointer; 
+            border: 2px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.3); margin-top: 25px;
         }
 
         /* [3] 특징 카드 */
-        .features { display: flex; justify-content: center; padding: 30px 10px; gap: 10px; background: white; }
-        .card { width: 30%; background: #f8f9fa; text-align: center; padding: 15px 5px; border-radius: 15px; border: 1px solid #eee; cursor: pointer; }
-        .card i { font-size: 24px; color: #1a472a; margin-bottom: 8px; }
-        .card p { font-size: 0.85rem; font-weight: bold; margin: 0; color: #1a472a; }
+        .features { display: flex; justify-content: center; padding: 30px 10px; gap: 10px; background: white; border-bottom: 1px solid #eee; }
+        .card { width: 30%; background: #f8f9fa; text-align: center; padding: 20px 10px; border-radius: 15px; cursor: pointer; border: 1px solid #eee; }
+        .card i { font-size: 24px; color: #1a472a; margin-bottom: 10px; }
+        .card p { font-size: 0.9rem; font-weight: bold; color: #1a472a; }
 
-        /* [4] 팝업창(모달) 스타일 */
+        /* [4] 팝업창 (모달) */
         #bookingModal { 
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.85); z-index: 9999; justify-content: center; align-items: center; padding: 20px;
+            background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center; 
         }
         .modal-content { 
-            background: white; width: 100%; max-width: 420px; padding: 35px 25px; border-radius: 25px; 
-            position: relative; border: 2px solid #d4af37;
+            background: white; width: 90%; max-width: 400px; padding: 30px; border-radius: 20px; 
+            position: relative; text-align: left; border: 2px solid #d4af37;
         }
-        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 30px;
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; color: #aaa; }
+        
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.9rem; }
+        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; font-size: 1rem; }
+        .submit-btn { width: 100%; padding: 15px; background: #1a472a; color: white; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; font-size: 1.1rem; }
+
+        /* [5] 푸터 (전화번호) */
+        footer { padding: 60px 20px; text-align: center; background: #1a472a; color: white; }
+        .tel-box { 
+            display: inline-flex; align-items: center; gap: 10px;
+            margin: 20px auto; padding: 15px 30px; border: 2px solid #d4af37; border-radius: 50px; 
+            color: #f7e08a; font-size: 1.6rem; font-weight: 900; text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <img src="./src/assets/panorama.jpg" onerror="this.style.display='none'">
+        <div class="hero-content">
+            <h1>DRAGON HILLS<br>GOLF CLUB</h1>
+            <div class="cta-btn" onclick="openPop()">실시간 예약문의</div>
+        </div>
+    </header>
+
+    <section class="features">
+        <div class="card" onclick="openPop()"><i class="fas fa-calendar-check"></i><p>예약하기</p></div>
+        <div class="card" onclick="alert('준비 중입니다.')"><i class="fas fa-utensils"></i><p>식사안내</p></div>
+        <div class="card" onclick="alert('준비 중입니다.')"><i class="fas fa-hotel"></i><p>숙소안내</p></div>
+    </section>
+
+    <div id="bookingModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closePop()">&times;</span>
+            <h2 style="margin-bottom:20px; color:#1a472a; text-align:center;">Reservation</h2>
+            <div class="form-group"><label>성함</label><input type="text" id="u_name" placeholder="대표자 성함"></div>
+            <div class="form-group"><label>날짜</label><input type="date" id="u_date"></div>
+            <div class="form-group">
+                <label>숙박</label>
+                <select id="u_stay">
+                    <option value="3박">3박</option><option value="4박">4박</option>
+                    <option value="5박">5박</option><option value="문의">기타 상담</option>
+                </select>
+            </div>
+            <div class="form-group"><label>인원</label><input type="number" id="u_people" placeholder="명"></div>
+            <button class="submit-btn" onclick="sendInfo()">문자로 예약 신청하기</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>한국인 매니저 직통 상담</p>
+        <a href="tel:070-8098-6781" class="tel-box">
+            <i class="fas fa-phone-alt"></i> 070.8098.6781
+        </a>
+        <p style="margin-top:30px; opacity:0.5; font-size:12px;">© 2026 Dragon Hills Golf Club</p>
+    </footer>
+
+    <script>
+        function openPop() { document.getElementById('bookingModal').style.display = 'flex'; }
+        function closePop() { document.getElementById('bookingModal').style.display = 'none'; }
+        
+        function sendInfo() {
+            var n = document.getElementById('u_name').value;
+            var d = document.getElementById('u_date').value;
+            var s = document.getElementById('u_stay').value;
+            var p = document.getElementById('u_people').value;
+            
+            if(!n || !d || !p) { alert('모든 항목을 입력해 주세요.'); return; }
+            
+            var msg = "[드래곤힐스 예약]\n성함: " + n + "\n날짜: " + d + "\n숙박: " + s + "\n인원: " + p + "명";
+            window.location.href = "sms:07080986781?body=" + encodeURIComponent(msg);
+            closePop();
+        }
+
+        window.onclick = function(e) {
+            if (e.target == document.getElementById('bookingModal')) closePop();
+        }
+    </script>
+</body>
+</html>
