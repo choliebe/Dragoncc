@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* [1] 기본 설정 */
-        * { box-sizing: border-box; -webkit-text-size-adjust: none; }
+        * { box-sizing: border-box; -webkit-text-size-adjust: none; scroll-behavior: smooth; }
         body { margin: 0; padding: 0; font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; overflow-x: hidden; background: #f8f9fa; }
 
         /* [2] 상단 영문 타이틀 및 배경 */
@@ -24,28 +24,29 @@
             border: 2px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
-        /* [3] 특징 카드 섹션 */
+        /* [3] 특징 카드 섹션 (Private -> Course Gallery 수정) */
         .features { display: flex; flex-wrap: wrap; justify-content: center; padding: 30px 15px; gap: 10px; }
         .card { 
-            width: 30%; min-width: 100px; text-align: center; padding: 15px 5px; border-radius: 10px; 
-            background: #fff; box-shadow: 0 3px 10px rgba(0,0,0,0.05); border: 1px solid #eee; 
+            width: 30%; min-width: 110px; text-align: center; padding: 15px 5px; border-radius: 10px; 
+            background: #fff; box-shadow: 0 3px 10px rgba(0,0,0,0.05); border: 1px solid #eee;
+            text-decoration: none; color: inherit;
         }
         .card i { font-size: 24px; color: #1a472a; margin-bottom: 8px; }
-        .card h3 { font-size: 0.9rem; margin: 5px 0; color: #333; }
+        .card h3 { font-size: 0.8rem; margin: 5px 0; color: #333; font-weight: bold; }
 
-        /* [4] 코스 사진 리스트 (삭제된 갤러리 대신 여기에 바로 표시) */
+        /* [4] 코스 사진 리스트 */
         .course-section { padding: 40px 15px; background: #fff; text-align: center; }
         .course-title { color: #1a472a; font-size: 1.5rem; margin-bottom: 25px; position: relative; display: inline-block; }
         .course-title::after { content: ''; display: block; width: 50px; height: 3px; background: #d4af37; margin: 10px auto; }
         
         .photo-list { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 25px; }
         .photo-item { position: relative; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 1px solid #ddd; }
-        .photo-item img { width: 100%; height: auto; display: block; transition: 0.3s; }
+        .photo-item img { width: 100%; height: auto; display: block; }
         
         /* 홀 번호 라벨 */
         .label { position: absolute; top: 15px; left: 15px; background: rgba(26, 71, 42, 0.85); color: #f7e08a; padding: 6px 15px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; z-index: 2; }
 
-        /* [5] 하단 예약 안내 - 골드 캡슐 스타일 */
+        /* [5] 하단 예약 안내 */
         footer { padding: 60px 20px; text-align: center; background: #1a472a; color: white; border-top: 4px solid #d4af37; }
         .tel-box { 
             display: flex; align-items: center; justify-content: center; 
@@ -70,12 +71,15 @@
     </header>
 
     <section class="features">
-        <div class="card"><i class="fas fa-tree"></i><h3>Private</h3></div>
+        <a href="#gallery" class="card">
+            <i class="fas fa-images"></i>
+            <h3>Course Gallery</h3>
+        </a>
         <div class="card"><i class="fas fa-utensils"></i><h3>K-Food</h3></div>
         <div class="card"><i class="fas fa-hotel"></i><h3>Hotel</h3></div>
     </section>
 
-    <section class="course-section">
+    <section class="course-section" id="gallery">
         <h2 class="course-title">Course View</h2>
         <div class="photo-list">
             <div class="photo-item"><span class="label">Hole 1</span><img src="hole1.jpg" onerror="this.src='hole1.JPG';"></div>
