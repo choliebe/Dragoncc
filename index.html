@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Dragon Hills Golf Club - Ratchaburi, Thailand</title>
+    <title>Dragon Hills Golf Club - Thailand</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* [1] 기본 설정 */
         * { box-sizing: border-box; -webkit-text-size-adjust: none; }
-        body { margin: 0; padding: 0; font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; overflow-x: hidden; background: #f8f9fa; color: #333; }
+        body { margin: 0; padding: 0; font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; background: #f8f9fa; color: #333; }
 
         /* [2] 상단 메인 타이틀 */
         .hero { height: 60vh; min-height: 400px; position: relative; display: flex; align-items: center; justify-content: center; text-align: center; color: white; background: #1a472a; padding: 0 20px; }
         .hero img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.3; z-index: 1; }
         .hero-content { position: relative; z-index: 2; width: 100%; }
-        .hero-content h1 { font-size: 2.5rem; font-weight: 900; margin: 0; text-shadow: 2px 2px 15px rgba(0,0,0,0.6); text-transform: uppercase; }
+        .hero-content h1 { font-size: 2.6rem; font-weight: 900; margin: 0; text-shadow: 2px 2px 15px rgba(0,0,0,0.6); text-transform: uppercase; letter-spacing: -1px; }
+        .hero-content p { font-size: 1.2rem; margin-top: 10px; opacity: 0.9; }
         
+        /* 버튼 클릭 이벤트 연결 확인 */
         .cta-btn { 
             display: inline-block; padding: 18px 45px; 
             background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%); 
@@ -24,6 +26,7 @@
             border: 2px solid #fff; box-shadow: 0 8px 25px rgba(0,0,0,0.4);
             cursor: pointer; transition: 0.3s;
         }
+        .cta-btn:hover { transform: scale(1.05); }
         .cta-btn:active { transform: scale(0.95); }
 
         /* [3] 특징 카드 */
@@ -40,35 +43,32 @@
         .photo-list { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; gap: 25px; }
         .photo-item { position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 1px solid #ddd; }
         .photo-item img { width: 100%; height: auto; display: block; }
-        .label { position: absolute; top: 15px; left: 15px; background: #1a472a; color: #f7e08a; padding: 6px 15px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; }
 
-        /* [5] 예약 팝업창 (모달) 스타일 */
+        /* [5] 예약 팝업창 (모달) 레이어 */
         .modal-overlay { 
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center; padding: 20px;
+            display: none; /* 초기값 숨김 */
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.85); z-index: 9999; 
+            justify-content: center; align-items: center; padding: 20px;
         }
         .booking-modal { 
-            background: white; width: 100%; max-width: 450px; padding: 30px 20px; border-radius: 25px; 
-            position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 2px solid #d4af37;
+            background: white; width: 100%; max-width: 450px; padding: 35px 25px; border-radius: 30px; 
+            position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.5); border: 2px solid #d4af37;
         }
-        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 24px; color: #999; cursor: pointer; border: none; background: none; }
-        .booking-modal h2 { color: #1a472a; margin-top: 0; font-weight: 900; text-align: center; }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 30px; color: #bbb; cursor: pointer; border: none; background: none; line-height: 1; }
+        .booking-modal h2 { color: #1a472a; margin: 0 0 25px 0; font-weight: 900; text-align: center; font-size: 1.8rem; }
         
-        .form-group { text-align: left; margin-bottom: 15px; }
-        .form-group label { display: block; font-size: 0.9rem; font-weight: bold; margin-bottom: 5px; color: #555; }
-        .form-group input, .form-group select { width: 100%; padding: 13px; border: 1px solid #ddd; border-radius: 12px; font-size: 1rem; outline: none; }
-        .form-group input:focus { border-color: #d4af37; }
+        .form-group { text-align: left; margin-bottom: 18px; }
+        .form-group label { display: block; font-size: 0.95rem; font-weight: bold; margin-bottom: 6px; color: #444; }
+        .form-group input, .form-group select { width: 100%; padding: 14px; border: 1px solid #ccc; border-radius: 12px; font-size: 1rem; outline: none; transition: 0.2s; }
+        .form-group input:focus { border-color: #d4af37; box-shadow: 0 0 5px rgba(212, 175, 55, 0.3); }
         
-        .submit-btn { width: 100%; padding: 16px; background: #1a472a; color: white; border: none; border-radius: 12px; font-weight: 800; font-size: 1.1rem; cursor: pointer; margin-top: 10px; }
+        .submit-btn { width: 100%; padding: 16px; background: #1a472a; color: white; border: none; border-radius: 12px; font-weight: 800; font-size: 1.15rem; cursor: pointer; margin-top: 10px; }
+        .kakao-link { display: block; text-align: center; margin-top: 15px; color: #3c1e1e; background: #fee500; padding: 16px; border-radius: 12px; font-weight: 800; text-decoration: none; font-size: 1.15rem; }
 
-        /* [6] 하단 연락처 */
+        /* [6] 하단 푸터 */
         footer { padding: 60px 20px; text-align: center; background: #1a472a; color: white; border-top: 5px solid #d4af37; }
-        .tel-box { 
-            display: flex; align-items: center; justify-content: center; 
-            margin: 25px auto; padding: 15px 25px; border: 2px solid #d4af37; border-radius: 50px; 
-            width: 90%; max-width: 360px;
-        }
-        .tel-link { font-size: 1.6rem; font-weight: 900; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 15px; }
+        .tel-link { font-size: 1.8rem; font-weight: 900; color: #f7e08a; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 15px; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -78,90 +78,31 @@
         <div class="hero-content">
             <h1>DRAGON HILLS GOLF CLUB</h1>
             <p>Ratchaburi, Thailand</p>
-            <div class="cta-btn" onclick="openModal()">실시간 예약문의</div>
+            <div class="cta-btn" onclick="openBooking()">실시간 예약문의</div>
         </div>
     </header>
 
     <section class="features">
         <div class="card" onclick="toggleGallery()"><i class="fas fa-images"></i><h3>Course View</h3></div>
-        <div class="card"><i class="fas fa-utensils"></i><h3>K-Food</h3></div>
-        <div class="card"><i class="fas fa-hotel"></i><h3>Hotel</h3></div>
+        <div class="card" onclick="openBooking()"><i class="fas fa-utensils"></i><h3>K-Food</h3></div>
+        <div class="card" onclick="openBooking()"><i class="fas fa-hotel"></i><h3>Hotel</h3></div>
     </section>
 
     <section id="gallery-section">
         <h2 style="color: #1a472a;">Course View</h2>
         <div class="photo-list">
-            <div class="photo-item"><span class="label">Hole 1</span><img src="hole1.jpg" onerror="this.src='https://via.placeholder.com/700x450?text=Hole+1'"></div>
-            <div class="photo-item"><span class="label">Hole 2</span><img src="hole2.jpg" onerror="this.src='https://via.placeholder.com/700x450?text=Hole+2'"></div>
+            <div class="photo-item"><img src="hole1.jpg" onerror="this.src='https://via.placeholder.com/700x450?text=Hole+1'"></div>
+            <div class="photo-item"><img src="hole2.jpg" onerror="this.src='https://via.placeholder.com/700x450?text=Hole+2'"></div>
         </div>
     </section>
 
-    <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-overlay" id="bookingOverlay">
         <div class="booking-modal">
-            <button class="close-modal" onclick="closeModal()">&times;</button>
-            <h2>Booking Form</h2>
-            <form action="javascript:void(0);" onsubmit="sendBooking()">
+            <button class="close-modal" onclick="closeBooking()">&times;</button>
+            <h2>Reservation</h2>
+            <form onsubmit="handleBooking(event)">
                 <div class="form-group">
                     <label>대표자 성함</label>
-                    <input type="text" id="name" placeholder="성함을 입력하세요" required>
+                    <input type="text" id="user_name" placeholder="성함을 입력하세요" required>
                 </div>
-                <div class="form-group">
-                    <label>출발 날짜</label>
-                    <input type="date" id="date" required>
-                </div>
-                <div class="form-group">
-                    <label>숙박 기간 (박수)</label>
-                    <select id="stay">
-                        <option value="3박">3박</option>
-                        <option value="4박">4박</option>
-                        <option value="5박">5박</option>
-                        <option value="장박(문의)">장기 숙박(상담)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>라운딩 인원</label>
-                    <input type="number" id="people" placeholder="숫자만 입력 (예: 4)" min="1" required>
-                </div>
-                <button type="submit" class="submit-btn">카톡/문자로 예약 전송</button>
-            </form>
-        </div>
-    </div>
-
-    <footer id="contact">
-        <h2>문의처</h2>
-        <div class="tel-box">
-            <a href="tel:070-8098-6781" class="tel-link">
-                <i class="fas fa-phone-alt"></i> 070.8098.6781
-            </a>
-        </div>
-        <p style="margin-top: 40px; opacity: 0.5; font-size: 11px;">© 2026 Dragon Hills Golf Club. All rights reserved.</p>
-    </footer>
-
-    <script>
-        // 코스 사진 토글
-        function toggleGallery() {
-            var section = document.getElementById("gallery-section");
-            section.style.display = (section.style.display === "block") ? "none" : "block";
-            if(section.style.display === "block") {
-                window.scrollTo({ top: section.offsetTop - 20, behavior: 'smooth' });
-            }
-        }
-
-        // 팝업 열기/닫기
-        function openModal() {
-            document.getElementById('modalOverlay').style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // 뒷배경 스크롤 방지
-        }
-        function closeModal() {
-            document.getElementById('modalOverlay').style.display = 'none';
-            document.body.style.overflow = 'auto'; // 스크롤 원복
-        }
-
-        // 예약 전송 함수
-        function sendBooking() {
-            const name = document.getElementById('name').value;
-            const date = document.getElementById('date').value;
-            const stay = document.getElementById('stay').value;
-            const people = document.getElementById('people').value;
-            
-            const message = `[드래곤힐스 예약문의]\n
+                <div class="form-
