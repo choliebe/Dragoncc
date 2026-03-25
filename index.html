@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* [1] 기본 설정 */
-        * { box-sizing: border-box; -webkit-text-size-adjust: none; scroll-behavior: smooth; }
+        * { box-sizing: border-box; -webkit-text-size-adjust: none; }
         body { margin: 0; padding: 0; font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; overflow-x: hidden; background: #f8f9fa; }
 
         /* [2] 상단 영문 타이틀 및 배경 */
@@ -24,26 +24,25 @@
             border: 2px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
-        /* [3] 특징 카드 섹션 (Private -> Course Gallery 수정) */
+        /* [3] 특징 카드 섹션 */
         .features { display: flex; flex-wrap: wrap; justify-content: center; padding: 30px 15px; gap: 10px; }
         .card { 
             width: 30%; min-width: 110px; text-align: center; padding: 15px 5px; border-radius: 10px; 
             background: #fff; box-shadow: 0 3px 10px rgba(0,0,0,0.05); border: 1px solid #eee;
-            text-decoration: none; color: inherit;
+            cursor: pointer; transition: 0.3s;
         }
+        .card:active { transform: scale(0.95); } /* 터치 시 눌리는 효과 */
         .card i { font-size: 24px; color: #1a472a; margin-bottom: 8px; }
-        .card h3 { font-size: 0.8rem; margin: 5px 0; color: #333; font-weight: bold; }
+        .card h3 { font-size: 0.85rem; margin: 5px 0; color: #333; font-weight: bold; }
 
-        /* [4] 코스 사진 리스트 */
-        .course-section { padding: 40px 15px; background: #fff; text-align: center; }
+        /* [4] 코스 사진 리스트 (기본적으로 숨김 처리) */
+        #gallery-section { display: none; padding: 40px 15px; background: #fff; text-align: center; }
         .course-title { color: #1a472a; font-size: 1.5rem; margin-bottom: 25px; position: relative; display: inline-block; }
         .course-title::after { content: ''; display: block; width: 50px; height: 3px; background: #d4af37; margin: 10px auto; }
         
         .photo-list { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 25px; }
         .photo-item { position: relative; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 1px solid #ddd; }
         .photo-item img { width: 100%; height: auto; display: block; }
-        
-        /* 홀 번호 라벨 */
         .label { position: absolute; top: 15px; left: 15px; background: rgba(26, 71, 42, 0.85); color: #f7e08a; padding: 6px 15px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; z-index: 2; }
 
         /* [5] 하단 예약 안내 */
@@ -71,21 +70,21 @@
     </header>
 
     <section class="features">
-        <a href="#gallery" class="card">
+        <div class="card" onclick="toggleGallery()">
             <i class="fas fa-images"></i>
-            <h3>Course Gallery</h3>
-        </a>
+            <h3>Course View</h3>
+        </div>
         <div class="card"><i class="fas fa-utensils"></i><h3>K-Food</h3></div>
         <div class="card"><i class="fas fa-hotel"></i><h3>Hotel</h3></div>
     </section>
 
-    <section class="course-section" id="gallery">
+    <section id="gallery-section">
         <h2 class="course-title">Course View</h2>
         <div class="photo-list">
             <div class="photo-item"><span class="label">Hole 1</span><img src="hole1.jpg" onerror="this.src='hole1.JPG';"></div>
             <div class="photo-item"><span class="label">Hole 2</span><img src="hole2.jpg" onerror="this.src='hole2.JPG';"></div>
             <div class="photo-item"><span class="label">Hole 3</span><img src="hole3.jpg" onerror="this.src='hole3.JPG';"></div>
-        </div>
+            </div>
     </section>
 
     <footer id="contact">
@@ -99,5 +98,16 @@
         <p style="margin-top: 40px; opacity: 0.5; font-size: 11px;">© 2026 Dragon Hills Golf & Country Club.</p>
     </footer>
 
-</body>
-</html>
+    <script>
+        function toggleGallery() {
+            var section = document.getElementById("gallery-section");
+            if (section.style.display === "block") {
+                section.style.display = "none"; // 이미 열려있으면 닫기
+            } else {
+                section.style.display = "block"; // 숨겨져 있으면 보이기
+                // 사진 위치로 부드럽게 화면 이동
+                window.scrollTo({
+                    top: section.offsetTop - 50,
+                    behavior: 'smooth'
+                });
+            }
